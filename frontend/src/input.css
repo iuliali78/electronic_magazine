@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #eef4fe;
+}
+
+/* полоса прокрутки */
+.optionContainer::-webkit-scrollbar,
+.modal-window__input::-webkit-scrollbar {
+  width: 6px; /* ширина scrollbar */
+}
+.optionContainer::-webkit-scrollbar-track,
+.modal-window__input::-webkit-scrollbar-track {
+  background: #dde9fc; /* цвет дорожки */
+}
+.optionContainer::-webkit-scrollbar-thumb,
+.modal-window__input::-webkit-scrollbar-thumb {
+  background-color: #80b6ff; /* цвет плашки */
+  border-radius: 20px; /* закругления плашки */
+}

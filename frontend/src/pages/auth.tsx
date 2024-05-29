@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../services/user";
-import { MAIN_URL, ROLES, initialValuesMessage } from "../const";
+import { MAIN_URL, ROLES, SINGUP_URL, initialValuesMessage } from "../const";
 import { useDispatch } from "react-redux";
 import { saveUser, setIsAuth } from "../redux/slices/userSlice";
 import { FormField } from "models/form";
@@ -95,10 +95,10 @@ function Auth() {
             <div className="auth__info-link text-center text-[14px]">
               Нет аккаунта? <br />
               <Link
-                to={""}
+                to={SINGUP_URL}
                 className="auth__info-link__text pl-[3px] text-[#010F58] hover:text-[#4d69f3] duration-[200ms] ease-in-out"
               >
-                Обратитесь в администрацию факультета
+                Зарегистрируйтесь
               </Link>
             </div>
           </div>

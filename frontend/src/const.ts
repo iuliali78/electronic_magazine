@@ -1,5 +1,6 @@
 export const MAIN_URL = "/";
 export const AUTH_URL = "/signin";
+export const SINGUP_URL = "/signup";
 
 
 //список возможных статусов
@@ -27,3 +28,4 @@ export enum ROLES {
 export const API_URL = "http://localhost:8080";
 export const BASE_API_AUTH_URL = "/api/auth";
 export const LOGIN_URL = "/login";
+export const BACK_SIGNUP_URL = "/register";

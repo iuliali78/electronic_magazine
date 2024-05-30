@@ -46,13 +46,13 @@ function Auth() {
 
         switch (data.roles[0]) {
           case "ROLE_USER":
-            role = ROLES.ROLE_USER;
+            role = ROLES.ROLE_STUDENT;
             break;
           case "ROLE_MODERATOR":
-            role = ROLES.ROLE_EXPERT;
+            role = ROLES.ROLE_TEACHER;
             break;
           case "ROLE_ADMIN":
-            role = ROLES.ROLE_BOSS;
+            role = ROLES.ROLE_DEAN;
             break;
         }
 

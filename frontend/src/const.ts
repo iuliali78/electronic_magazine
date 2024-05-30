@@ -19,13 +19,22 @@ export const initialValuesMessage = {
 
 //значения ролей пользователей
 export enum ROLES {
-  ROLE_USER = "Пользователь",
-  ROLE_EXPERT = "Эксперт",
-  ROLE_BOSS = "Руководитель", // :)
+  ROLE_STUDENT = "Студент",
+  ROLE_TEACHER = "Преподаватель",
+  ROLE_DEAN = "Декан", // :)
 }
+
+//список ролей в выпадающем списке
+export const userTypes = {
+  options: [
+    { name: "Студент", id: 0 },
+    { name: "Преподаватель", id: 1 },
+    { name: "Декан", id: 2 },
+  ],
+};
 
 //пути для запроса на бекенд
 export const API_URL = "http://localhost:8080";
 export const BASE_API_AUTH_URL = "/api/auth";
 export const LOGIN_URL = "/login";
-export const BACK_SIGNUP_URL = "/register";
+export const BACK_SIGNUP_URL = "/registration";

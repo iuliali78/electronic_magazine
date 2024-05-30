@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="wrapper mb-[64px]">
-      {!location.pathname.includes("signin") ? <Header /> : ""}
+      {!location.pathname.includes("signin") && !location.pathname.includes("signup") ? <Header /> : ""}
       <Routes>
         {isAuthUser ? (
           <></>

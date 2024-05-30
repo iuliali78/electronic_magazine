@@ -5,4 +5,11 @@ export interface FormField {
   fieldType: string;
   inputType?: string;
   placeholder?: string;
+
+  fieldComplextyType?: string;
+}
+
+export interface IRoleUser {
+  name: string;
+  id: number;
 }

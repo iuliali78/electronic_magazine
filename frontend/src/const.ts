@@ -1,7 +1,9 @@
 export const MAIN_URL = "/";
 export const AUTH_URL = "/signin";
 export const SINGUP_URL = "/signup";
-
+export const JOURNAL_URL = "/journal";
+export const USER_PAGE_URL = "/user-page";
+export const STATISTICS_URL = "/statistics";
 
 //список возможных статусов
 export enum VARIANTS_STATUS {

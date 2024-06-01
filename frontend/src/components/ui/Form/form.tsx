@@ -59,7 +59,7 @@ const Form: React.FunctionComponent<IProps> = (props) => {
                   options={userTypes.options}
                   displayValue="name"
                   placeholder={field.placeholder}
-                  onSelect={(list) => setField(field.fieldType, list)}
+                  onSelect={(list: string[]) => setField(field.fieldType, list)}
                   className="multiselect"
                 />
               )}

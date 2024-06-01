@@ -1,4 +1,4 @@
-import { BACK_SIGNUP_URL, BASE_API_AUTH_URL, LOGIN_URL } from "../const";
+import { BACK_SIGNUP_URL, BASE_API_AUTH_URL, LOGIN_URL } from "const";
 import { ISignin } from "../models/user";
 import { $host } from "./authService";
 

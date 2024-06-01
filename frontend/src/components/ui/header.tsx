@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { logOut } from "../../redux/slices/userSlice";
 import { AUTH_URL } from "../../const";
+import logo from '../../assets/images/LOGO.svg'
 
 function Header() {
   const dispatch = useDispatch();
@@ -19,22 +20,22 @@ function Header() {
   }, [dispatch]);
 
   return (
-    <header className="header bg-[#CDE1FF]">
+    <header className="header bg-[#263145] py-[15px] px-[15px]">
       <div className="header__inner flex max-w-[1750px] mx-auto justify-between items-center max-2xl:max-w-[1336px]">
         <div
           className="header__logo cursor-pointer"
           onClick={() => clickLink("/")}
         >
-          {/* <img src={logo} alt="logo" /> */}
+          <img src={logo} alt="logo" />
         </div>
         {userInfo.isAuth ? (
-          <div className="header__content flex items-center py-[22px]">
-            <div className="header__content-user mr-[25px]">
-              {userInfo.username}/{userInfo.roles}
+          <div className="header__content flex items-center">
+            <div className="header__content-user text-[#FFFFFF] mr-[150px] text-[24px]">
+              {userInfo.username}
             </div>
             <div className="header__content-exit">
               <button
-                className="header__content-btn py-[4px] px-[8px] bg-[#ffffff] rounded-[5px] hover:bg-[#86b6f8] duration-[200ms] ease-in-out"
+                className="header__content-btn py-[5px] px-[53px] bg-[#ffffff] leading-[32px] rounded-[15px] hover:bg-[#86b6f8] duration-[200ms] ease-in-out"
                 type="button"
                 onClick={clickLogout}
               >
@@ -45,7 +46,7 @@ function Header() {
         ) : (
           <Link
             to={AUTH_URL}
-            className="text-[#000000] py-[22px] hover:text-[#86b6f8] duration-[200ms] ease-in-out"
+            className="text-[#000] py-[5px] px-[53px] bg-[#ffffff] leading-[32px] rounded-[15px] hover:text-[#86b6f8] duration-[200ms] ease-in-out"
           >
             Войти в аккаунт
           </Link>

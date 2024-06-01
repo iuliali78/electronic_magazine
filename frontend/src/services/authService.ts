@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { API_URL } from "../const";
+import { API_URL } from "const";
 
 const token = localStorage.getItem("token");
 

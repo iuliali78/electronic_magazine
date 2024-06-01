@@ -1,37 +1,42 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { RootState } from "./redux/store";
-import { AUTH_URL, SINGUP_URL } from "./const";
-import Header from "./components/ui/header";
-import Auth from "./pages/auth";
-import Signup from "pages/signup";
+import { AUTH_URL } from "./const";
+import Header from "./components/ui/Header";
+import { authRoutes, routes } from "routes";
+import Sidebar from "components/ui/Sidebar";
 
 function App() {
-  const location = useLocation();
-  //const navigate =useNavigate();
+  const navigate = useNavigate();
 
   const isAuthUser = useSelector(
     (state: RootState) => state.userSlice.user.isAuth
   );
 
-  // React.useEffect(() => {
-  //   if (!isAuthUser) {
-  //     navigate(AUTH_URL);
-  //   }
-  // }, [isAuthUser, navigate]);
+  React.useEffect(() => {
+    console.log(isAuthUser);
+    if (!isAuthUser) {
+      navigate(AUTH_URL);
+    }
+  }, [isAuthUser]);
 
   return (
-    <div className="wrapper mb-[64px]">
-      {!location.pathname.includes("signin") && !location.pathname.includes("signup") ? <Header /> : ""}
-      <Routes>
-        {isAuthUser ? (
-          <></>
-        ) : (
-          <Route key="login-key" path={AUTH_URL} element={<Auth />} />
-        )}
-        <Route key="signup-key" path={SINGUP_URL} element={<Signup />} />
-      </Routes>
+    <div className="wrapper mb-[15px]">
+      {/* Шапка и сайдбар отображаются в зависимости от авторизации пользователя на сайте */}
+      {isAuthUser ? <Header /> : ""}
+      {isAuthUser ? <Sidebar /> : ""}
+      <main>
+        <Routes>
+          {!isAuthUser
+            ? routes.map(({ id, url, Component }) => (
+                <Route key={id} path={url} element={Component} />
+              ))
+            : authRoutes.map(({ id, url, Component }) => (
+                <Route key={id} path={url} element={Component} />
+              ))}
+        </Routes>
+      </main>
     </div>
   );
 }

@@ -4,6 +4,8 @@
 
 body {
   background-color: #eef4fe;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
 }
 
 /* полоса прокрутки */

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../services/user";
-import { MAIN_URL, ROLES, SINGUP_URL, initialValuesMessage } from "../const";
+import { MAIN_URL, ROLES, SINGUP_URL, initialValuesMessage } from "const";
 import { useDispatch } from "react-redux";
 import { saveUser, setIsAuth } from "../redux/slices/userSlice";
 import { FormField } from "models/form";
@@ -55,6 +55,10 @@ function Auth() {
             role = ROLES.ROLE_DEAN;
             break;
         }
+
+        // Сохраняем некоторые данные в localStorage для отбоажения в шапке сайта
+        localStorage.setItem('FIO', data.username);
+        localStorage.setItem('roles', JSON.stringify(data.roles));
 
         //заносим данные в redux
         dispatch(

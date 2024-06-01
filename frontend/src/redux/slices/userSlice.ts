@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type User = {
   id: number;
-  username: string;
+  username: string | null;
   email: string;
   roles: string;
   isAuth: boolean;
@@ -15,10 +15,10 @@ export interface userState {
 const initialState: userState = {
   user: {
     id: 0,
-    username: "",
+    username: localStorage.getItem('FIO'),
     email: "",
-    roles: "",
-    isAuth: false,
+    roles: JSON.parse(localStorage.getItem('roles')!),
+    isAuth: !!localStorage.getItem('token'),
   }
 };
 

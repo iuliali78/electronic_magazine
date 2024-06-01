@@ -40,6 +40,10 @@ export const userSlice = createSlice({
         roles: "",
         isAuth: false,
       };
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("roles");
     },
   },
 });

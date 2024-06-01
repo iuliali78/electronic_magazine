@@ -1,14 +1,18 @@
 import React from 'react'
 
 interface IProps {
-    classNames: string;
     children: React.ReactNode;
+    classNames?: string;
 }
 
 const PageWrapper: React.FunctionComponent<IProps> = ({classNames, children}) => {
     
     const addStyles = () => {
-        return classNames.concat(" h-[100vh] flex justify-center items-center");
+        if(classNames) {
+            return classNames?.concat(" h-[100vh] flex justify-center items-center");
+        }
+       
+        return "h-[100vh] flex justify-center items-center";
     }
   
     return (

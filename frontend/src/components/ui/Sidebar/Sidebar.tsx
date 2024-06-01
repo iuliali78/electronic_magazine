@@ -1,6 +1,6 @@
-import { HomeIcon, UserIcon, BoardIcon, CardIcon } from "components/icons";
+import { HomeIcon, UserIcon, BoardIcon } from "components/icons";
 import { createDynamicStyles } from "utils/other";
-import { MAIN_URL, USER_PAGE_URL, JOURNAL_URL, STATISTICS_URL } from "const";
+import { MAIN_URL, USER_PAGE_URL, JOURNAL_URL } from "const";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // Массив путей для сайдбара
@@ -34,7 +34,7 @@ const Sidebar = () => {
         {navigationRoutes.map((route) => (
           <li
             className={createDynamicStyles(
-              location.pathname === route.url,
+              location.pathname.includes(route.url),
               "p-[10px] rounded-[15px] hover:bg-[#FFFFFF99] duration-[200ms] cursor-pointer mb-[15px] last:mb-[0px]",
               "bg-[#FFFFFF99]"
             )}

@@ -1,9 +1,18 @@
-export const MAIN_URL = "/";
+export const MAIN_URL = "/home";
+
+// аутентификация/регистрация
 export const AUTH_URL = "/signin";
 export const SINGUP_URL = "/signup";
-export const JOURNAL_URL = "/journal";
+
+// Основной контент
 export const USER_PAGE_URL = "/user-page";
 export const STATISTICS_URL = "/statistics";
+
+export const JOURNAL_URL = "/journal";
+// Вложеннын маршруты для страницы с журналом
+export const ATTENDANCE_URL = "/journal/attendance";
+export const GRADE_URL = "/journal/grade";
+export const GENERAL_STATISTICS_URL = "/journal/general-statistics";
 
 //список возможных статусов
 export enum VARIANTS_STATUS {

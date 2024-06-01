@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { RootState } from "./redux/store";
-import { AUTH_URL } from "./const";
+import { AUTH_URL, MAIN_URL } from "./const";
 import Header from "./components/ui/Header";
 import { authRoutes, routes } from "routes";
 import Sidebar from "components/ui/Sidebar";
@@ -18,6 +18,8 @@ function App() {
     console.log(isAuthUser);
     if (!isAuthUser) {
       navigate(AUTH_URL);
+    } else {
+      navigate(MAIN_URL);
     }
   }, [isAuthUser]);
 

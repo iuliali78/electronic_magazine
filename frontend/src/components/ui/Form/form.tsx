@@ -34,7 +34,7 @@ const Form: React.FunctionComponent<IProps> = (props) => {
   };
 
   return (
-    <div className="max-h-[500px] overflow-y-auto">
+    <div className="max-h-[460px] overflow-y-auto">
       <form className="flex flex-col justify-center">
         {props.fields.map((field) => (
           <div className="flex flex-col mb-[30px]">

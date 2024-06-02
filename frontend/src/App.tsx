@@ -29,14 +29,24 @@ function App() {
       {isAuthUser ? <Header /> : ""}
       {isAuthUser ? <Sidebar /> : ""}
       <main>
+        {/* Маршрутизация в приложении (react-router-dom) */}
         <Routes>
           {!isAuthUser
             ? routes.map(({ id, url, Component }) => (
                 <Route key={id} path={url} element={Component} />
               ))
-            : authRoutes.map(({ id, url, Component }) => (
-                <Route key={id} path={url} element={Component} />
-              ))}
+            : authRoutes.map(({ id, url, Component, nestedComponents }) => {
+                return !nestedComponents ? (
+                  <Route key={id} path={url} element={Component} />
+                ) : (
+                  // Отображение вложенных компонентов
+                  <Route key={id} path={url} element={Component}>
+                    {nestedComponents.map(({ id, url, Component }) => (
+                      <Route key={id} path={url} element={Component} />
+                    ))}
+                  </Route>
+                );
+              })}
         </Routes>
       </main>
     </div>

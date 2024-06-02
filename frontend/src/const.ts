@@ -9,10 +9,10 @@ export const USER_PAGE_URL = "/user-page";
 export const STATISTICS_URL = "/statistics";
 
 export const JOURNAL_URL = "/journal";
-// Вложеннын маршруты для страницы с журналом
-export const ATTENDANCE_URL = "/journal/attendance";
-export const GRADE_URL = "/journal/grade";
-export const GENERAL_STATISTICS_URL = "/journal/general-statistics";
+// Вложенные маршруты для страницы с журналом
+export const ATTENDANCE_URL = "attendance";
+export const GRADE_URL = "grade";
+export const GENERAL_STATISTICS_URL = "general-statistics";
 
 //список возможных статусов
 export enum VARIANTS_STATUS {

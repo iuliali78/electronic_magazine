@@ -16,7 +16,7 @@ export const navigationRoutes = [
   {
     url: JOURNAL_URL,
     icon: <BoardIcon />,
-  }
+  },
 ];
 
 const Sidebar = () => {
@@ -31,8 +31,9 @@ const Sidebar = () => {
   return (
     <nav className="bg-[#ACD0FF8F] border-[1px] border-solid border-[#5972F7] rounded-[15px] px-[10px] inline-block fixed top-[120px] left-[60px]">
       <ul className="py-[30px] inline-flex flex-col justify-center items-center">
-        {navigationRoutes.map((route) => (
+        {navigationRoutes.map((route, index) => (
           <li
+            key={index}
             className={createDynamicStyles(
               location.pathname.includes(route.url),
               "p-[10px] rounded-[15px] hover:bg-[#FFFFFF99] duration-[200ms] cursor-pointer mb-[15px] last:mb-[0px]",

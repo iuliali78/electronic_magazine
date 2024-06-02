@@ -41,6 +41,7 @@ export const userSlice = createSlice({
         isAuth: false,
       };
 
+      // Также очищаем данные из LocalStorage
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       localStorage.removeItem("roles");

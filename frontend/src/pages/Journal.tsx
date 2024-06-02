@@ -1,6 +1,6 @@
 import PageWrapper from "components/ui/PageWrapper";
 import { ATTENDANCE_URL, GENERAL_STATISTICS_URL, GRADE_URL } from "const";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { createDynamicStyles } from "utils/other";
 
 const journalRoutes = [
@@ -41,6 +41,7 @@ const Journal = () => {
             </li>
           ))}
         </ul>
+        <Outlet />
       </div>
     </PageWrapper>
   );

@@ -1,38 +1,69 @@
-import { AUTH_URL, JOURNAL_URL, MAIN_URL, SINGUP_URL, USER_PAGE_URL } from "const";
+import {
+  ATTENDANCE_URL,
+  AUTH_URL,
+  GENERAL_STATISTICS_URL,
+  GRADE_URL,
+  JOURNAL_URL,
+  MAIN_URL,
+  SINGUP_URL,
+  USER_PAGE_URL,
+} from "const";
 import { IRoute } from "models/other";
 import Auth from "./pages/Auth";
 import Signup from "pages/Signup";
 import Home from "pages/Home";
 import Journal from "pages/Journal";
 import User from "pages/User";
+import {
+  AttendanceBlock,
+  GeneralStaisticsBlock,
+  GradeBlock,
+} from "components/ui/journal";
 
 export const routes: IRoute[] = [
-    {
-        id: 0,
-        url: AUTH_URL,
-        Component: <Auth/>
-    },
-    {
-        id: 1,
-        url: SINGUP_URL,
-        Component: <Signup/>
-    }
-]
+  {
+    id: 0,
+    url: AUTH_URL,
+    Component: <Auth />,
+  },
+  {
+    id: 1,
+    url: SINGUP_URL,
+    Component: <Signup />,
+  },
+];
 
 export const authRoutes: IRoute[] = [
-    {
+  {
+    id: 0,
+    url: MAIN_URL,
+    Component: <Home />,
+  },
+  {
+    id: 1,
+    url: JOURNAL_URL,
+    Component: <Journal />,
+    nestedComponents: [
+      {
         id: 0,
-        url: MAIN_URL,
-        Component: <Home/>
-    },
-    {
+        url: ATTENDANCE_URL,
+        Component: <AttendanceBlock />,
+      },
+      {
         id: 1,
-        url: JOURNAL_URL,
-        Component: <Journal/>
-    },
-    {
+        url: GRADE_URL,
+        Component: <GradeBlock />,
+      },
+      {
         id: 2,
-        url: USER_PAGE_URL,
-        Component: <User/>
-    }
-]
+        url: GENERAL_STATISTICS_URL,
+        Component: <GeneralStaisticsBlock />,
+      },
+    ],
+  },
+  {
+    id: 2,
+    url: USER_PAGE_URL,
+    Component: <User />,
+  },
+];

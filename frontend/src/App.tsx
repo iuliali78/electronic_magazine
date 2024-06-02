@@ -15,7 +15,6 @@ function App() {
   );
 
   React.useEffect(() => {
-    console.log(isAuthUser);
     if (!isAuthUser) {
       navigate(AUTH_URL);
     } else {

@@ -34,7 +34,7 @@ const Form: React.FunctionComponent<IProps> = (props) => {
   };
 
   return (
-    <div className="max-h-[460px] overflow-y-auto">
+    <div className="max-h-[460px] overflow-y-auto overflow-x-hidden">
       <form className="flex flex-col justify-center">
         {props.fields.map((field) => (
           <div className="flex flex-col mb-[30px]">
@@ -76,7 +76,7 @@ const Form: React.FunctionComponent<IProps> = (props) => {
         <div className="flex justify-center mb-[15px]">
           <button
             type="button"
-            className="bg-[#93A8F4] px-[30px] py-[3px] min-w-[150px] min-h-[33px] rounded-[5px] hover:bg-[#5778f1] duration-[200ms] ease-in-out cursor-pointer"
+            className="bg-[#ACD0FF] px-[30px] py-[3px] min-w-[150px] min-h-[33px] rounded-[5px] hover:bg-[#5778f1] duration-[200ms] ease-in-out cursor-pointer"
             onClick={handleClick}>
             {isLoaded ? props.buttonText || "Подтвердить" : <Loader />}
           </button>

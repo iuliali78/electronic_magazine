@@ -1,37 +1,20 @@
 import Table from "components/ui/Table";
-import { IColumn, RowModel } from "models/table";
-import React from "react";
-
-const tableData: { rows: RowModel[]; columns: IColumn[] } = {
-  columns: [
-    {
-      id: 0,
-      field: "fio",
-      headerName: "ФИО",
-    },
-    {
-      id: 1,
-      field: "test",
-      headerName: "Тест",
-    },
-  ],
-
-  rows: [
-    {
-      id: 0,
-      fio: "Александров Артём Евгеньевич",
-    },
-    {
-      id: 1,
-      test: "Тестируем",
-    },
-  ],
-};
+import { IResponseTableData } from "models/api";
+import { useEffect, useState } from "react";
+import { getTableData } from "services/journalService";
 
 const Attendance = () => {
+  const [data, setData] = useState<IResponseTableData | null>(null);
+
+  useEffect(() => {
+    getTableData().then((res) => {
+      res.map((table) => (table.name === "attendance" ? setData(table) : null));
+    });
+  }, []);
+
   return (
     <div>
-      <Table columns={tableData.columns} rows={tableData.rows} />
+      {data && <Table columns={data.columns} rows={data.rows} canEdit />}
     </div>
   );
 };

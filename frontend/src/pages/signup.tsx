@@ -2,7 +2,7 @@ import Form from "components/ui/Form";
 import { defineRole } from "utils/signup";
 import { FormField, IRoleUser } from "models/form";
 import { useNavigate } from "react-router-dom";
-import { register } from "services/user";
+import { register } from "services/userServise";
 
 const signupFields: FormField[] = [
   {

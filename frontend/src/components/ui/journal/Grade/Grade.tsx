@@ -8,6 +8,7 @@ const tableData: { rows: RowModel[]; columns: IColumn[] } = {
       id: 0,
       field: "grade",
       headerName: "Успеваемость",
+      type: "string"
     },
   ],
 

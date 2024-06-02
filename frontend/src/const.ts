@@ -49,3 +49,7 @@ export const API_URL = "http://localhost:8080";
 export const BASE_API_AUTH_URL = "/api/auth";
 export const LOGIN_URL = "/login";
 export const BACK_SIGNUP_URL = "/registration";
+
+//пути для запроса mock данных (используется mockApi)
+export const MOCK_API_URL = "https://665ca60f3e4ac90a04da399f.mockapi.io/api"
+export const MOCK_TABLEDATA_URL = "/tableData"

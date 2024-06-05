@@ -3,7 +3,7 @@ import { FormField, ResultFormObj } from "models/form";
 import { CloseEyeIcon, EyeIcon } from "components/icons";
 import Multiselect from "multiselect-react-dropdown";
 import { userTypes } from "const";
-import Loader from "components/loader/loader";
+import Loader from "components/Loader/Loader";
 
 interface IProps {
   fields: FormField[];

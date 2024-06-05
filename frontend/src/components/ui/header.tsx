@@ -24,7 +24,7 @@ function Header() {
       <div className="header__inner flex max-w-[1750px] mx-auto justify-between items-center max-2xl:max-w-[1336px]">
         <div
           className="header__logo cursor-pointer"
-          onClick={() => clickLink("/")}
+          onClick={() => clickLink("/home")}
         >
           <img src={logo} alt="logo" />
         </div>

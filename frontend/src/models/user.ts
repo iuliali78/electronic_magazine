@@ -5,10 +5,16 @@ export type TRole = {
 
 export interface IUser {
   id: number;
-  username: string;
+  name: string;
+  surname: string,
+  patronymic: string,
   email: string;
-  password: string;
   roles: TRole[];
+}
+
+// Модель для студента
+export interface IStudent extends IUser {
+  group?: string;
 }
 
 export interface ISignin {
@@ -16,6 +22,7 @@ export interface ISignin {
   username: string;
   email: string;
   roles: string[];
+  group?: string,
   type: string;
   token: string;
 }

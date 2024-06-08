@@ -42,7 +42,7 @@ function Auth() {
         });
 
         //определение роли
-        let role;
+        let role = '';
 
         switch (data.roles[0]) {
           case "ROLE_USER":
@@ -57,16 +57,19 @@ function Auth() {
         }
 
         // Сохраняем некоторые данные в localStorage для отбоажения в шапке сайта
-        localStorage.setItem('FIO', data.username);
-        localStorage.setItem('roles', JSON.stringify(data.roles));
+        // email - это имя пользователя, username - это почта. На бекенде данные сверяются по username, а на клиенте нужно отправлять почту
+        localStorage.setItem('FIO', data.email);
+        localStorage.setItem('role', role);
+        if(data.group) localStorage.setItem('group', data.group);
 
         //заносим данные в redux
         dispatch(
           saveUser({
             id: data.id,
-            username: data.username,
-            email: data.email,
+            username: data.email, // Тут та же самая причина
+            email: data.username, // 
             roles: role,
+            group: data.group,
           })
         );
         dispatch(setIsAuth(true));

@@ -9,11 +9,13 @@ import Form from "components/ui/Form";
 
 const authFields: FormField[] = [
   {
+    id: 0,
     label: "Email",
     fieldType: "email",
     placeholder: "Введите email",
   },
   {
+    id: 1,
     label: "Пароль",
     fieldType: "password",
     inputType: "password",

@@ -1,6 +1,7 @@
 export type ResultFormObj = Record<string, any>;
 
 export interface FormField {
+  id: number;
   label: string;
   fieldType: string;
   inputType?: string;

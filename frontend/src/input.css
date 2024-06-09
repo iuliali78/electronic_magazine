@@ -26,12 +26,8 @@ body {
 }
 
 .multiselect {
-  border-radius: 5px;
-  padding: 5px;
   width: 100%;
-  outline: none; 
-  background-color: #ffffff;
-  cursor: pointer;
+  height: 100%;
 
   .searchWrapper {
     padding: 0;
@@ -40,6 +36,10 @@ body {
     min-height: 100%;
     width: 100%;
   }
+}
+
+.multiselect-active {
+  border: 1px solid #93A8F4;
 }
 
  /* Спиннер загрузки */

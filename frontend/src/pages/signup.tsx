@@ -6,28 +6,33 @@ import Form from "components/ui/Form";
 
 const signupFields: FormField[] = [
   {
+    id: 0,
     label: "Фамилия, Имя, Отчество",
     fieldType: "FIO",
     placeholder: "Введите ФИО",
   },
   {
+    id: 1,
     label: "Выберите тип пользователя",
     fieldType: "rolesUser",
     fieldComplextyType: "multiselect",
     placeholder: "Выберите тип",
   },
   {
+    id: 2,
     label: "Придумайте логин или введите почту",
     fieldType: "email",
     placeholder: "Введите email",
   },
   {
+    id: 3,
     label: "Придумайте пароль",
     fieldType: "password",
     inputType: "password",
     placeholder: "Введите пароль",
   },
   {
+    id: 4,
     label: "Подтвердите пароль",
     fieldType: "confirmPassword",
     inputType: "password",

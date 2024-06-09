@@ -22,7 +22,7 @@ const tableData: { rows: RowModel[]; columns: IColumn[] } = {
 
 const Grade = () => {
   return (
-    <div className="grow">
+    <div className="grow max-h-[600px] overflow-auto">
       <Table columns={tableData.columns} rows={tableData.rows} />
     </div>
   );

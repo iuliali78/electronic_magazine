@@ -24,10 +24,12 @@ const Attendance = () => {
   }, []);
 
   const handleEditRow = (row: RowModel) => {
+    console.log(row);
     const childrenModal = mapComponentInModal(ModalAttendance, {
       title: row.FIO,
       props: {
-        info: "Тестируем модальное окно"
+        date: row.date,
+        presenceMark: row.presenceMark
       }
     })
 
@@ -35,7 +37,7 @@ const Attendance = () => {
   }
 
   return (
-    <div className="grow">
+    <div className="grow max-h-[600px] overflow-auto">
       <Table
         columns={data?.columns}
         rows={data?.rows}

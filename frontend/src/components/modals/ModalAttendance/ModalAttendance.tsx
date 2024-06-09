@@ -8,6 +8,7 @@ const attendanceModalFields: FormField[] = [
     id: 0,
     label: "Дата",
     fieldType: "date",
+    fieldComplextyType: "dateColumn",
     placeholder: "Выберите дату",
   },
   {
@@ -18,12 +19,13 @@ const attendanceModalFields: FormField[] = [
   },
 ];
 
-const ModalAttendance: React.FunctionComponent<IPropsModalAttendance> = () => {
+const ModalAttendance: React.FunctionComponent<IPropsModalAttendance> = (props) => {
   return (
     <div className="px-[24px]">
       <Form
         fields={attendanceModalFields}
         onClick={(obj) => new Promise((res) => console.log(obj))}
+        data={{date: props.date, presenceMark: props.presenceMark}}
         buttonText="Сохранить"
       />
     </div>

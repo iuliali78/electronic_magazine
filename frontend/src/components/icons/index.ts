@@ -6,3 +6,4 @@ export { default as BoardIcon } from './BoardIcon';
 export { default as CardIcon } from './CardIcon';
 export { default as PenIcon } from './PenIcon';
 export { default as CloseIcon } from './CloseIcon';
+export { default as CalendarIcon } from './CalendarIcon';

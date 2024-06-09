@@ -22,7 +22,7 @@ const tableData: { rows: RowModel[]; columns: IColumn[] } = {
 
 const GeneralStatistics = () => {
   return (
-    <div>
+    <div className="grow">
       <Table columns={tableData.columns} rows={tableData.rows} />
     </div>
   );

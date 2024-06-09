@@ -1,13 +1,25 @@
 import React from "react";
 
-const Loader = () => {
+interface IProps {
+  variants?: "primary" | "secondary";
+}
+
+const Loader: React.FunctionComponent<IProps> = ({
+  variants = "primary"
+}) => {
   return (
-    <div className="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+    <>
+      {variants === "primary" ? (
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      ) : (
+        <span className="loader"></span>
+      )}
+    </>
   );
 };
 

@@ -85,7 +85,7 @@ const Form: React.FunctionComponent<IProps> = (props) => {
             className="bg-[#ACD0FF] px-[30px] py-[3px] min-w-[150px] min-h-[33px] rounded-[5px] hover:bg-[#5778f1] duration-[200ms] ease-in-out cursor-pointer"
             onClick={handleClick}
           >
-            {isLoaded ? props.buttonText || "Подтвердить" : <Loader />}
+            {isLoaded ? props.buttonText || "Подтвердить" : <Loader variants="primary"/>}
           </button>
         </div>
       </form>

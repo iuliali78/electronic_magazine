@@ -26,18 +26,19 @@ const Journal = () => {
   useEffect(() => {
     // При первом рендере страницы происходит редирект на страницу с успеваемостью, чтобы сразу отобразить блок таблицы
     navigate(ATTENDANCE_URL);
-  }, [])
+  }, []);
 
   return (
     <PageWrapper>
-      <div className="flex flex-col justify-center">
-        <div className="flex mb-[50px] justify-center">
+      <div className="flex flex-col justify-center min-h-[650px]">
+        <div className="flex mb-[50px] justify-center shrink-0">
           <h2 className="text-[36px] mr-[88px]">Группа бВМ-201</h2>
           <h2 className="text-[36px]">Название дисциплины</h2>
         </div>
-        <ul className="flex justify-center mb-[24px]">
-          {journalRoutes.map((route) => (
+        <ul className="flex justify-center mb-[24px] shrink-0">
+          {journalRoutes.map((route, index) => (
             <li
+              key={index}
               className={createDynamicStyles(
                 location.pathname.includes(route.url),
                 "text-[28px] rounded-[15px] border-[1px] border-solid border-[#93A8F4] py-[5px] px-[23px] mr-[176px] last:mr-[0px]",

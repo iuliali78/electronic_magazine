@@ -8,6 +8,10 @@ interface IProps {
   columns?: IColumn[];
   rows?: RowModel[];
 
+  onAdd?: () => void;
+  onEdit?: (row: RowModel) => void;
+  onDelete?: (id: number) => void;
+
   // Условия для отображения соответсвующих иконок в столбце действий
   canAdd?: boolean;
   canEdit?: boolean;
@@ -36,7 +40,7 @@ const Table: React.FunctionComponent<IProps> = (props) => {
             if (props.canEdit) {
               actions.push({
                 icon: <PenIcon />,
-                onClick: () => console.log(row),
+                onClick: () => props.onEdit!(row),
               });
             }
 

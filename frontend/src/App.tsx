@@ -6,6 +6,7 @@ import { AUTH_URL, MAIN_URL } from "./const";
 import Header from "./components/ui/Header";
 import { authRoutes, routes } from "routes";
 import Sidebar from "components/ui/Sidebar";
+import { ModalWrapper } from "components/modals";
 
 function App() {
   const navigate = useNavigate();
@@ -23,32 +24,35 @@ function App() {
   }, [isAuthUser]);
 
   return (
-    <div className="wrapper mb-[15px]">
-      {/* Шапка и сайдбар отображаются в зависимости от авторизации пользователя на сайте */}
-      {isAuthUser ? <Header /> : ""}
-      {isAuthUser ? <Sidebar /> : ""}
-      <main>
-        {/* Маршрутизация в приложении (react-router-dom) */}
-        <Routes>
-          {!isAuthUser
-            ? routes.map(({ id, url, Component }) => (
-                <Route key={id} path={url} element={Component} />
-              ))
-            : authRoutes.map(({ id, url, Component, nestedComponents }) => {
-                return !nestedComponents ? (
+    <>
+      <div className="wrapper mb-[15px]">
+        {/* Шапка и сайдбар отображаются в зависимости от авторизации пользователя на сайте */}
+        {isAuthUser ? <Header /> : ""}
+        {isAuthUser ? <Sidebar /> : ""}
+        <main>
+          {/* Маршрутизация в приложении (react-router-dom) */}
+          <Routes>
+            {!isAuthUser
+              ? routes.map(({ id, url, Component }) => (
                   <Route key={id} path={url} element={Component} />
-                ) : (
-                  // Отображение вложенных компонентов
-                  <Route key={id} path={url} element={Component}>
-                    {nestedComponents.map(({ id, url, Component }) => (
-                      <Route key={id} path={url} element={Component} />
-                    ))}
-                  </Route>
-                );
-              })}
-        </Routes>
-      </main>
-    </div>
+                ))
+              : authRoutes.map(({ id, url, Component, nestedComponents }) => {
+                  return !nestedComponents ? (
+                    <Route key={id} path={url} element={Component} />
+                  ) : (
+                    // Отображение вложенных компонентов
+                    <Route key={id} path={url} element={Component}>
+                      {nestedComponents.map(({ id, url, Component }) => (
+                        <Route key={id} path={url} element={Component} />
+                      ))}
+                    </Route>
+                  );
+                })}
+          </Routes>
+        </main>
+      </div>
+      <ModalWrapper/>
+    </>
   );
 }
 

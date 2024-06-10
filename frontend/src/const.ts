@@ -8,6 +8,8 @@ export const SINGUP_URL = "/signup";
 export const USER_PAGE_URL = "/user-page";
 export const STATISTICS_URL = "/statistics";
 
+export const LIST_DEPARTMENTS_URL = "/list-departments"
+
 export const JOURNAL_URL = "/journal";
 // Вложенные маршруты для страницы с журналом
 export const ATTENDANCE_URL = "attendance";

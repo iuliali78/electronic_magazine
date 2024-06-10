@@ -55,50 +55,64 @@ const Table: React.FunctionComponent<IProps> = (props) => {
   return (
     <>
       {props.isLoaded ? (
-        <table className="w-full border-separate border-spacing-0">
-          <thead className="bg-[#E1EDFF]">
-            <tr>
-              {tableColumns.map((column) => (
-                <th
-                  key={column.id}
-                  className="border-t-[1px] border-l-[1px] border-[#CDE1FF] border-solid first:rounded-tl-[16px] last:rounded-tr-[16px] last:border-r-[1px]"
-                >
-                  {column.headerName}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {props.rows?.map((row, index) => (
-              <tr key={row.id}>
+        <>
+          {props.canAdd && (
+            <div className="flex justify-end">
+              <button
+                type="button"
+                className="text-[20px] py-[10px] px-[35px] border-[1px] border-solid border-[#93A8F4] bg-[#CDE1FF] rounded-[10px] mb-[20px] hover:bg-[#5778f1] duration-[200ms] ease-in-out"
+                onClick={props.onAdd}
+              >
+                Добавить
+              </button>
+            </div>
+          )}
+
+          <table className="w-full border-separate border-spacing-0">
+            <thead className="bg-[#E1EDFF]">
+              <tr>
                 {tableColumns.map((column) => (
-                  <td
-                    key={column.id || "id_actions"}
-                    className={createDynamicStyles(
-                      index === props.rows!.length - 1,
-                      "text-center border-t-[1px] border-l-[1px] border-solid border-[#CDE1FF] bg-[#FFFFFF] py-[5px] px-[15px] last:border-r-[1px]",
-                      "first:rounded-bl-[16px] last:rounded-br-[16px] border-b-[1px]"
-                    )}
+                  <th
+                    key={column.id}
+                    className="border-t-[1px] border-l-[1px] border-[#CDE1FF] border-solid first:rounded-tl-[16px] last:rounded-tr-[16px] last:border-r-[1px]"
                   >
-                    <span className="inline-flex">
-                      {row[column.field] ??
-                        (isActionsColumn(column) &&
-                          column.getActions(row).map((action, index) => (
-                            <span
-                              key={index}
-                              onClick={action.onClick}
-                              className="p-[7px] cursor-pointer rounded-[50px] hover:bg-[#000] hover:bg-opacity-10 transition duration-300 ease-in-out"
-                            >
-                              {action.icon}
-                            </span>
-                          )))}
-                    </span>
-                  </td>
+                    {column.headerName}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {props.rows?.map((row, index) => (
+                <tr key={row.id}>
+                  {tableColumns.map((column) => (
+                    <td
+                      key={column.id || "id_actions"}
+                      className={createDynamicStyles(
+                        index === props.rows!.length - 1,
+                        "text-center border-t-[1px] border-l-[1px] border-solid border-[#CDE1FF] bg-[#FFFFFF] py-[5px] px-[15px] last:border-r-[1px]",
+                        "first:rounded-bl-[16px] last:rounded-br-[16px] border-b-[1px]"
+                      )}
+                    >
+                      <span className="inline-flex">
+                        {row[column.field] ??
+                          (isActionsColumn(column) &&
+                            column.getActions(row).map((action, index) => (
+                              <span
+                                key={index}
+                                onClick={action.onClick}
+                                className="p-[7px] cursor-pointer rounded-[50px] hover:bg-[#000] hover:bg-opacity-10 transition duration-300 ease-in-out"
+                              >
+                                {action.icon}
+                              </span>
+                            )))}
+                      </span>
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       ) : (
         <div className="w-full min-h-[150px] bg-[#ffffff] rounded-[16px] overflow-hidden flex flex-col">
           <div className="bg-[#E1EDFF] min-h-[35px]"></div>

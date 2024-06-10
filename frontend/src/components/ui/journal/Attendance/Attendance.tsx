@@ -23,18 +23,27 @@ const Attendance = () => {
     });
   }, []);
 
+  const handleCreateRow = () => {
+    const childrenModal = mapComponentInModal(ModalAttendance, {
+      title: "Создание записи",
+      props: { date: new Date().toUTCString() },
+    });
+
+    dispatch(showComponentInModal(childrenModal));
+  };
+
   const handleEditRow = (row: RowModel) => {
     console.log(row);
     const childrenModal = mapComponentInModal(ModalAttendance, {
       title: row.FIO,
       props: {
         date: row.date,
-        presenceMark: row.presenceMark
-      }
-    })
+        presenceMark: row.presenceMark,
+      },
+    });
 
-    dispatch(showComponentInModal(childrenModal))
-  }
+    dispatch(showComponentInModal(childrenModal));
+  };
 
   return (
     <div className="grow max-h-[600px] overflow-auto">
@@ -44,6 +53,8 @@ const Attendance = () => {
         isLoaded={isLoaded}
         canEdit
         onEdit={(row) => handleEditRow(row)}
+        canAdd
+        onAdd={handleCreateRow}
       />
     </div>
   );

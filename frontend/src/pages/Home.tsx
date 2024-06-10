@@ -1,7 +1,7 @@
 import PageWrapper from "components/ui/PageWrapper";
 import { useNavigate } from "react-router-dom";
 import VTSU_LOGO from "../assets/images/VSTU-LOGO.png";
-import { JOURNAL_URL } from "const";
+import { JOURNAL_URL, LIST_DEPARTMENTS_URL } from "const";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,10 +24,17 @@ const Home = () => {
             </div>
             <p className="text-[28px] mb-[92px] text-center max-w-[1050px] max-[1590px]:text-[20px] max-[1590px]:max-w-[940px]">
               Данный информационный веб-сервис предназначен для отслеживания
-              посещаемости и успеваемости студентов факультета.<br/>Все данные
-              доступны в удобном онлайн формате{" "}
+              посещаемости и успеваемости студентов факультета.
+              <br />
+              Все данные доступны в удобном онлайн формате{" "}
             </p>
-            <button type="button" className="px-[30px] py-[12px] border-[1px] border-[#93A8F4] border-solid bg-[#FFFFFF] rounded-[15px] text-[40px] max-[1590px]:text-[30px] max-[1590px]:px-[25px] max-[1590px]:py-[7px]" onClick={() => navigate(JOURNAL_URL)}>Перейти к журналу</button>
+            <button
+              type="button"
+              className="px-[30px] py-[12px] border-[1px] border-[#93A8F4] border-solid bg-[#FFFFFF] rounded-[15px] text-[40px] max-[1590px]:text-[30px] max-[1590px]:px-[25px] max-[1590px]:py-[7px]"
+              onClick={() => navigate(LIST_DEPARTMENTS_URL)}
+            >
+              Перейти к журналу
+            </button>
           </div>
           <div className="w-[511px] h-[649px]">
             <img className="object-cover" src={VTSU_LOGO} alt="VTSU" />

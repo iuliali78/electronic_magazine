@@ -1,4 +1,4 @@
 export interface IPropsModalAttendance {
     date: string;
-    presenceMark: string;
+    presenceMark?: string;
 }

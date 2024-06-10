@@ -7,3 +7,5 @@ export { default as CardIcon } from './CardIcon';
 export { default as PenIcon } from './PenIcon';
 export { default as CloseIcon } from './CloseIcon';
 export { default as CalendarIcon } from './CalendarIcon';
+export { default as RightArrowIcon } from './RightArrowIcon';
+export { default as DownArrowIcon } from './DownArrowIcon';

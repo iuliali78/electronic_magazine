@@ -1,6 +1,6 @@
 import { HomeIcon, UserIcon, BoardIcon } from "components/icons";
 import { createDynamicStyles } from "utils/other";
-import { MAIN_URL, USER_PAGE_URL, JOURNAL_URL } from "const";
+import { MAIN_URL, USER_PAGE_URL, LIST_DEPARTMENTS_URL } from "const";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // Массив путей для сайдбара
@@ -14,7 +14,7 @@ export const navigationRoutes = [
     icon: <UserIcon />,
   },
   {
-    url: JOURNAL_URL,
+    url: LIST_DEPARTMENTS_URL,
     icon: <BoardIcon />,
   },
 ];

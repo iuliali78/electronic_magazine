@@ -4,21 +4,23 @@ import {
   GENERAL_STATISTICS_URL,
   GRADE_URL,
   JOURNAL_URL,
+  LIST_DEPARTMENTS_URL,
   MAIN_URL,
   SINGUP_URL,
   USER_PAGE_URL,
 } from "const";
-import { IRoute } from "models/other";
 import Auth from "./pages/Auth";
 import Signup from "pages/Signup";
 import Home from "pages/Home";
 import Journal from "pages/Journal";
 import User from "pages/User";
+import ListDepartments from "pages/ListDepartments";
 import {
   AttendanceBlock,
   GeneralStaisticsBlock,
   GradeBlock,
 } from "components/ui/journal";
+import { IRoute } from "models/other";
 
 export const routes: IRoute[] = [
   {
@@ -66,4 +68,9 @@ export const authRoutes: IRoute[] = [
     url: USER_PAGE_URL,
     Component: <User />,
   },
+  {
+    id: 3,
+    url: LIST_DEPARTMENTS_URL,
+    Component: <ListDepartments/>
+  }
 ];

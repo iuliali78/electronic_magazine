@@ -7,14 +7,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 export const navigationRoutes = [
   {
     url: MAIN_URL,
+    text: "Главная",
     icon: <HomeIcon />,
   },
   {
     url: USER_PAGE_URL,
+    text: "Моя страница",
     icon: <UserIcon />,
   },
   {
     url: LIST_DEPARTMENTS_URL,
+    text: "Журнал",
     icon: <BoardIcon />,
   },
 ];
@@ -29,19 +32,20 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className="bg-[#ACD0FF8F] border-[1px] border-solid border-[#5972F7] rounded-[15px] px-[10px] inline-block fixed top-[120px] left-[60px]">
-      <ul className="py-[30px] inline-flex flex-col justify-center items-center">
+    <nav className="group bg-[#ACD0FF8F] border-[1px] border-solid border-[#5972F7] rounded-[15px] px-[10px] inline-block fixed top-[120px] left-[60px]">
+      <ul className="py-[30px] inline-flex flex-col justify-center">
         {navigationRoutes.map((route, index) => (
           <li
             key={index}
             className={createDynamicStyles(
               location.pathname.includes(route.url),
-              "p-[10px] rounded-[15px] hover:bg-[#FFFFFF99] duration-[200ms] cursor-pointer mb-[15px] last:mb-[0px]",
+              "flex items-center p-[10px] rounded-[15px] cursor-pointer mb-[15px] last:mb-[0px] h-[58px] duration-[250ms] hover:bg-[#FFFFFF99]",
               "bg-[#FFFFFF99]"
             )}
             onClick={() => linkToUrl(route.url)}
           >
-            {route.icon}
+            <span className="duration-[250ms] group-hover:mr-[15px] w-[30px] h-[30px]">{route.icon}</span>
+            <span className="text-[25px] text-nowrap hidden group-hover:block">{route.text}</span>
           </li>
         ))}
       </ul>

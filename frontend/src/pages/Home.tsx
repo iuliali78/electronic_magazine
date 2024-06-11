@@ -1,7 +1,7 @@
 import PageWrapper from "components/ui/PageWrapper";
 import { useNavigate } from "react-router-dom";
 import VTSU_LOGO from "../assets/images/VSTU-LOGO.png";
-import { JOURNAL_URL, LIST_DEPARTMENTS_URL } from "const";
+import { LIST_DEPARTMENTS_URL } from "const";
 
 const Home = () => {
   const navigate = useNavigate();

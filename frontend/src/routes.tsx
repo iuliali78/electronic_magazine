@@ -43,7 +43,7 @@ export const authRoutes: IRoute[] = [
   },
   {
     id: 1,
-    url: JOURNAL_URL,
+    url: JOURNAL_URL + "/:id",
     Component: <Journal />,
     nestedComponents: [
       {

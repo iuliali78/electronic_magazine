@@ -1,13 +1,15 @@
 import { DownArrowIcon, RightArrowIcon } from "components/icons";
 import PageWrapper from "components/ui/PageWrapper";
+import { JOURNAL_URL } from "const";
 import { listDepartments, listGroupsDisciplines } from "data/staticData";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ListDepartments = () => {
   const [activeItem, setActiveItem] = useState<number | null>(null);
-  const [activeListDiscipline, setActiveListDiscipline] = useState<
-    string | null
-  >(null);
+  const [activeListDiscipline, setActiveListDiscipline] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   // Обработка клика по пункту из списка кафедр
   const handleClickItem = (id: number) => {
@@ -24,6 +26,10 @@ const ListDepartments = () => {
     if (relationId === activeListDiscipline) setActiveListDiscipline(null);
     else setActiveListDiscipline(relationId);
   };
+
+  const handleClickDiscipline = (disciplineId: string) => {
+    navigate(JOURNAL_URL + "/" + disciplineId);
+  }
 
   return (
     <PageWrapper
@@ -85,6 +91,7 @@ const ListDepartments = () => {
                   <div
                     key={disciplineObj.id}
                     className="border-[1px] bg-[#ACD0FF8F] rounded-[15px] border-solid border-[#5972F7] p-[10px] flex justify-center items-center cursor-pointer hover:bg-[#5778f1] hover:text-[#FFFFFF] duration-[250ms] ease-in-out"
+                    onClick={() => handleClickDiscipline(`${groupDisciplines.groupId}_${disciplineObj.id}`)}
                   >
                     <span className="text-center">
                       {disciplineObj.discipline}

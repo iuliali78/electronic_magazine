@@ -32,7 +32,7 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className="group bg-[#ACD0FF8F] border-[1px] border-solid border-[#5972F7] rounded-[15px] px-[10px] inline-block fixed top-[120px] left-[60px]">
+    <nav className="group bg-[#D5E5FF] border-[1px] border-solid border-[#5972F7] rounded-[15px] px-[10px] inline-block fixed top-[120px] left-[60px] z-[100]">
       <ul className="py-[30px] inline-flex flex-col justify-center">
         {navigationRoutes.map((route, index) => (
           <li

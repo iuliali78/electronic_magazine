@@ -1,8 +1,11 @@
 import { IColumn, RowModel } from "./table";
 
-export interface IResponseTableData {
+export interface ITableData {
     id: string;
     name: string;
     columns: IColumn[];
-    rows: RowModel[]
+    info: {
+        disciplineId: string,
+        rows: RowModel[]
+    }[]
 }

@@ -1,7 +1,11 @@
 import PageWrapper from "components/ui/PageWrapper";
 import { ATTENDANCE_URL, GENERAL_STATISTICS_URL, GRADE_URL } from "const";
+import { ITableData } from "models/api";
 import { useEffect } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import { setIsLoaded, setTableData } from "redux/slices/tableDataSlice";
+import { fetchTableData } from "services/journalService";
 import { createDynamicStyles } from "utils/other";
 
 const journalRoutes = [
@@ -19,14 +23,41 @@ const journalRoutes = [
   },
 ];
 
+
 const Journal = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const dispatch = useDispatch();
+
+  const getSelectTableData = (tableId: number) => {
+    // Получение данных при загрузке страницы с списко кафедр
+    fetchTableData(tableId).then((res) => {
+      // Фильтруем данные для нужной нам таблицы
+      const filterRows = res.info.filter(tableInfo => tableInfo.disciplineId === id);
+
+      // Перезаписываем объект данных таблицы найденными данными
+      const changeResponse: ITableData = {
+        ...res,
+        info: filterRows
+      }
+
+      // Сохраняем измененный объект таблицы в стор (Redux)
+      dispatch(setTableData(changeResponse));
+
+      dispatch(setIsLoaded(true));
+      });
+  }
 
   useEffect(() => {
     // При первом рендере страницы происходит редирект на страницу с успеваемостью, чтобы сразу отобразить блок таблицы
     navigate(ATTENDANCE_URL);
-  }, []);
+
+    dispatch(setIsLoaded(false));
+    // Получение данных с "сервера"
+    getSelectTableData(1)
+  }, [])
 
   return (
     <PageWrapper>

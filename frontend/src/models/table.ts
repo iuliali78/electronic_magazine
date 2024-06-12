@@ -1,3 +1,5 @@
+import { ITableData } from "./api";
+
 export type RowModel = Record<string, any>;
 export type IColumn = BaseColumn | IColumnAction;
 
@@ -21,3 +23,5 @@ export interface IAction {
 export const isActionsColumn = (obj: IColumn): obj is IColumnAction => {
   return obj.type === "actions";
 };
+
+export type TableDataContext = { tableData: ITableData, isLoaded: boolean };

@@ -2,22 +2,26 @@ import PageWrapper from "components/ui/PageWrapper";
 import { ATTENDANCE_URL, GENERAL_STATISTICS_URL, GRADE_URL } from "const";
 import { ITableData } from "models/api";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { setIsLoaded, setTableData } from "redux/slices/tableDataSlice";
+import { RootState } from "redux/store";
 import { fetchTableData } from "services/journalService";
 import { createDynamicStyles } from "utils/other";
 
 const journalRoutes = [
   {
+    tableId: 1,
     url: ATTENDANCE_URL,
     name: "Посещаемость",
   },
   {
+    tableId: 2,
     url: GRADE_URL,
     name: "Успеваемость",
   },
   {
+    tableId: 3,
     url: GENERAL_STATISTICS_URL,
     name: "Общая статистика",
   },
@@ -29,12 +33,16 @@ const Journal = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  // Данные из стора
+  const { tableData, isLoaded } = useSelector((state: RootState) => state.tableDataSlice)
+
   const dispatch = useDispatch();
 
   const getSelectTableData = (tableId: number) => {
-    // Получение данных при загрузке страницы с списко кафедр
-    fetchTableData(tableId).then((res) => {
+    // Получение данных при загрузке страницы с списком кафедр
+    fetchTableData(tableId).then((res) => { 
       // Фильтруем данные для нужной нам таблицы
+      // TODO: сделать фильтрацию данных по роли. Преподаватель - все строки, Студент - его личная строка
       const filterRows = res.info.filter(tableInfo => tableInfo.disciplineId === id);
 
       // Перезаписываем объект данных таблицы найденными данными
@@ -48,6 +56,11 @@ const Journal = () => {
 
       dispatch(setIsLoaded(true));
       });
+  }
+
+  const handleClickTab = (tableId: number, route: string) => {
+    navigate(route);
+    getSelectTableData(tableId);
   }
 
   useEffect(() => {
@@ -72,16 +85,17 @@ const Journal = () => {
               key={index}
               className={createDynamicStyles(
                 location.pathname.includes(route.url),
-                "text-[28px] rounded-[15px] border-[1px] border-solid border-[#93A8F4] py-[5px] px-[23px] mr-[176px] last:mr-[0px]",
+                "text-[28px] rounded-[15px] border-[1px] border-solid border-[#93A8F4] py-[5px] px-[23px] mr-[176px] last:mr-[0px] duration-[250ms] hover:bg-[#FFFFFF] cursor-pointer",
                 "bg-[#FFFFFF]"
               )}
+              onClick={() => handleClickTab(route.tableId, route.url)}
             >
-              <Link to={route.url}>{route.name}</Link>
+              <span>{route.name}</span>
             </li>
           ))}
         </ul>
         {/* Отображение вложенного компонента при соответствующем url */}
-        <Outlet />
+        <Outlet context={{tableData, isLoaded}}/>
       </div>
     </PageWrapper>
   );

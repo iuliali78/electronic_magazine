@@ -1,13 +1,15 @@
 import ModalAttendance from "components/modals/ModalAttendance";
 import Table from "components/ui/Table";
-import { RowModel } from "models/table";
+import { RowModel, TableDataContext } from "models/table";
 import { useDispatch } from "react-redux";
+import { useOutletContext } from "react-router-dom";
 import { showComponentInModal } from "redux/slices/modalSlice";
 import { mapComponentInModal } from "utils/other";
 
 const Attendance = () => {
-
   const dispatch = useDispatch();
+
+  const data = useOutletContext<TableDataContext>();
 
   const handleCreateRow = () => {
     const childrenModal = mapComponentInModal(ModalAttendance, {
@@ -33,15 +35,15 @@ const Attendance = () => {
 
   return (
     <div className="grow max-h-[600px] overflow-auto">
-      {/* <Table
-        columns={data?.columns}
-        rows={data?.rows}
-        isLoaded={isLoaded}
+      <Table
+        columns={data.tableData?.columns}
+        rows={data.tableData?.info[0].rows}
+        isLoaded={data.isLoaded}
         canEdit
         onEdit={(row) => handleEditRow(row)}
         canAdd
         onAdd={handleCreateRow}
-      /> */}
+      />
     </div>
   );
 };

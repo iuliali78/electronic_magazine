@@ -39,6 +39,7 @@ const Journal = () => {
   const dispatch = useDispatch();
 
   const getSelectTableData = (tableId: number) => {
+    dispatch(setIsLoaded(false));
     // Получение данных при загрузке страницы с списком кафедр
     fetchTableData(tableId).then((res) => { 
       // Фильтруем данные для нужной нам таблицы
@@ -67,7 +68,6 @@ const Journal = () => {
     // При первом рендере страницы происходит редирект на страницу с успеваемостью, чтобы сразу отобразить блок таблицы
     navigate(ATTENDANCE_URL);
 
-    dispatch(setIsLoaded(false));
     // Получение данных с "сервера"
     getSelectTableData(1)
   }, [])

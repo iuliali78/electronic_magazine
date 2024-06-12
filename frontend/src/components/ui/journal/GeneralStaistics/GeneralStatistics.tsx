@@ -1,29 +1,17 @@
 import Table from "components/ui/Table";
-import { IColumn, RowModel } from "models/table";
-import React from "react";
-
-const tableData: { rows: RowModel[]; columns: IColumn[] } = {
-  columns: [
-    {
-      id: 0,
-      field: "general",
-      headerName: "Статистика",
-      type: "string"
-    },
-  ],
-
-  rows: [
-    {
-      id: 0,
-      general: "значение колонки",
-    },
-  ],
-};
+import { TableDataContext } from "models/table";
+import { useOutletContext } from "react-router-dom";
 
 const GeneralStatistics = () => {
+  const data = useOutletContext<TableDataContext>();
+
   return (
     <div className="grow max-h-[600px] overflow-auto">
-      <Table columns={tableData.columns} rows={tableData.rows} />
+       <Table
+        columns={data.tableData?.columns}
+        rows={data.tableData?.info[0].rows}
+        isLoaded={data.isLoaded}
+      />
     </div>
   );
 };

@@ -40,9 +40,18 @@ export enum ROLES {
 //список ролей в выпадающем списке
 export const userTypes = {
   options: [
-    { name: "Студент", id: 0 },
-    { name: "Преподаватель", id: 1 },
-    { name: "Декан", id: 2 },
+    { text: "Студент", value: "student", id: 0 },
+    { text: "Преподаватель", value: "teacher", id: 1 },
+    { text: "Декан", value: "dean", id: 2 },
+  ],
+};
+
+//список отметок присутсвия в выпадающем списке
+export const presenceMarks = {
+  options: [
+    { text: "П", value: "present", id: 0 },
+    { text: "Н", value: "absent", id: 1 },
+    { text: "Б", value: "ill", id: 2 },
   ],
 };
 

@@ -1,3 +1,5 @@
+import { Option } from "components/ui/SingleSelect/SingleSelect";
+
 export type ResultFormObj = Record<string, any>;
 
 export interface FormField {
@@ -8,9 +10,6 @@ export interface FormField {
   placeholder?: string;
 
   fieldComplextyType?: string;
-}
 
-export interface IRoleUser {
-  name: string;
-  id: number;
+  options?: Option[];
 }

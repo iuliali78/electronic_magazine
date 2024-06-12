@@ -6,6 +6,8 @@ export const defineRole = (role: string) => {
       return "admin";
     case ROLES.ROLE_TEACHER:
       return "mod";
+    case ROLES.ROLE_STUDENT:
+      return "user";
     default:
       return "";
   }

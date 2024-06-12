@@ -1,4 +1,5 @@
 import ModalAttendance from "components/modals/ModalAttendance";
+import { Option } from "components/ui/SingleSelect/SingleSelect";
 import Table from "components/ui/Table";
 import { RowModel, TableDataContext } from "models/table";
 import { useDispatch } from "react-redux";
@@ -14,18 +15,31 @@ const Attendance = () => {
   const handleCreateRow = () => {
     const childrenModal = mapComponentInModal(ModalAttendance, {
       title: "Создание записи",
-      props: { date: new Date().toUTCString() },
+      props: { mode: "create", dateValue: new Date().toUTCString() },
     });
 
     dispatch(showComponentInModal(childrenModal));
   };
 
   const handleEditRow = (row: RowModel) => {
-    console.log(row);
+    const dateRow = data.tableData?.info[0].rows[0];
+
+    // Формирование объекта с датами из таблицы (строки с датами)
+    const dateTypes = {
+      options: Object.keys(dateRow)
+        .filter((key) => key !== "id" && key !== "isDateRow")
+        .map((key, index) => ({
+          id: index,
+          value: key,
+          text: dateRow[key],
+        })),
+    };
+
     const childrenModal = mapComponentInModal(ModalAttendance, {
       title: row.FIO,
       props: {
-        date: row.date,
+        mode: "edit",
+        dateValue: dateTypes.options,
         presenceMark: row.presenceMark,
       },
     });

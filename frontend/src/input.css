@@ -25,23 +25,6 @@ body {
   border-radius: 20px; /* закругления плашки */
 }
 
-.multiselect {
-  width: 100%;
-  height: 100%;
-
-  .searchWrapper {
-    padding: 0;
-    border-radius: 0;
-    border: none;
-    min-height: 100%;
-    width: 100%;
-  }
-}
-
-.multiselect-active {
-  border: 1px solid #93A8F4;
-}
-
  /* Спиннер загрузки */
  
  /* Вариант первый */

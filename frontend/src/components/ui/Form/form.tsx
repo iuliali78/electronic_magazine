@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { FormField, ResultFormObj } from "models/form";
-import Multiselect from "multiselect-react-dropdown";
-import { userTypes } from "const";
 import Loader from "components/loader/Loader";
 import { createDynamicStyles } from "utils/other";
 import Input from "../Input";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CalendarIcon } from "components/icons";
+import SingleSelect from "../SingleSelect";
 
 interface IProps {
   fields: FormField[];
@@ -60,26 +58,21 @@ const Form: React.FunctionComponent<IProps> = (props) => {
                   onFocus={() => handleSelectField(field.id)}
                   onBlur={() => handleSelectField(null)}
                 />
-              ) : field.fieldComplextyType === "multiselect" ? (
-                <div
-                  className={createDynamicStyles(
-                    activeField === field.id,
-                    "p-[10px] rounded-[5px] outline-none bg-[#FFFFFF] border-[1px] border-solid cursor-pointer",
+              ) : field.fieldComplextyType === "singleSelect" ? (
+                <SingleSelect
+                  classNames={createDynamicStyles(
+                    field.id === activeField,
+                    "rounded-[5px] p-[10px] outline-none w-full border-[1px] border-solid cursor-pointer",
                     "border-[#93A8F4]"
                   )}
+                  options={field.options!}
+                  placeholder={field.placeholder}
+                  onChange={(text: string) =>
+                    setField(field.fieldType, text)
+                  }
                   onFocus={() => handleSelectField(field.id)}
                   onBlur={() => handleSelectField(null)}
-                >
-                  <Multiselect
-                    options={userTypes.options}
-                    displayValue="name"
-                    placeholder={field.placeholder}
-                    onSelect={(list: string[]) =>
-                      setField(field.fieldType, list)
-                    }
-                    className="multiselect"
-                  />
-                </div>
+                />
               ) : (
                 <div className={"relative"}>
                   <DatePicker
@@ -113,7 +106,7 @@ const Form: React.FunctionComponent<IProps> = (props) => {
         <div className="flex justify-center mb-[15px]">
           <button
             type="button"
-            className="bg-[#ACD0FF] px-[30px] py-[3px] min-w-[150px] min-h-[33px] rounded-[5px] hover:bg-[#5778f1] duration-[200ms] ease-in-out cursor-pointer"
+            className="bg-[#ACD0FF] px-[30px] py-[3px] min-w-[150px] min-h-[33px] rounded-[10px] hover:bg-[#5778f1] duration-[200ms] ease-in-out cursor-pointer"
             onClick={handleClick}
           >
             {isLoaded ? (

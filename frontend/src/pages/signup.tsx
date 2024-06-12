@@ -1,8 +1,9 @@
 import { defineRole } from "utils/signup";
-import { FormField, IRoleUser } from "models/form";
+import { FormField } from "models/form";
 import { useNavigate } from "react-router-dom";
 import { register } from "services/userServise";
 import Form from "components/ui/Form";
+import { userTypes } from "const";
 
 const signupFields: FormField[] = [
   {
@@ -14,8 +15,9 @@ const signupFields: FormField[] = [
   {
     id: 1,
     label: "Выберите тип пользователя",
-    fieldType: "rolesUser",
-    fieldComplextyType: "multiselect",
+    fieldType: "roleUser",
+    fieldComplextyType: "singleSelect",
+    options: userTypes.options,
     placeholder: "Выберите тип",
   },
   {
@@ -43,15 +45,13 @@ const signupFields: FormField[] = [
 const Signup = () => {
   const navigate = useNavigate();
 
-  const handleRegister = async (
+  const handleRegister = (
     email: string,
     username: string,
     password: string,
-    roles: IRoleUser[]
+    role: string
   ) => {
-    const mappedRoles = roles.map((role) => defineRole(role.name));
-
-    register(email, username, password, mappedRoles).then((res) =>
+    return register(email, username, password, [defineRole(role)]).then((res) =>
       navigate("/signin")
     );
   };
@@ -67,7 +67,9 @@ const Signup = () => {
           <Form
             fields={signupFields}
             buttonText="Зарегистрироваться"
-            onClick={(obj) => handleRegister(obj.email, obj.FIO, obj.password, obj.rolesUser)}
+            onClick={(obj) =>
+              handleRegister(obj.email, obj.FIO, obj.password, obj.roleUser)
+            }
           />
         </div>
       </div>

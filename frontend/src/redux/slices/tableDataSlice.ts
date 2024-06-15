@@ -38,13 +38,15 @@ export const tableDataSlice = createSlice({
           type: "string",
           headerName: "Дата"
       }
-      console.log(action.payload);
+
       if(state.tableData) {
         // Добавляем новую колонку в таблицу
         state.tableData.columns.push(newColumn);
         // Добавляем значение даты в данную колонку
         state.tableData.info[0].rows = state.tableData.info[0].rows.map(row => {
-          if(row.isDateRow) return {...row, [`dateNumber-${Number(lastColumnIndex) + 1}`]: moment(action.payload.date).format("YYYY-MM-DD") }
+          if(row.isAdditionalRow && !row.isTypeLesson) return {...row, [`dateNumber-${Number(lastColumnIndex) + 1}`]: moment(action.payload.date).format("YYYY-MM-DD") }
+        // Добавляем тип занятия в данную колонку, если есть такое значение в переданном объекте
+          if(row.isTypeLesson) return {...row, [`dateNumber-${Number(lastColumnIndex) + 1}`]: action.payload.lessonType.text }
           return row;
         })
       } 

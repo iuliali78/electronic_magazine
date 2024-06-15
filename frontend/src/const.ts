@@ -55,6 +55,26 @@ export const presenceMarks = {
   ],
 };
 
+//список оценок в выпадающем списке
+export const estimationTypes = {
+  options: [
+    { text: "5", value: "five", id: 0 },
+    { text: "4", value: "four", id: 1 },
+    { text: "3", value: "three", id: 2 },
+    { text: "2", value: "two", id: 3 },
+  ],
+};
+
+//список типов занятий в выпадающем списке
+export const lessonTypes = {
+  options: [
+    { text: "ЛР", value: "laboratoryWork", id: 0 },
+    { text: "ПР", value: "practicalWork", id: 1 },
+    { text: "Экзамен", value: "exam", id: 2 },
+    { text: "Зачет", value: "test", id: 3 },
+  ],
+};
+
 //пути для запроса на бекенд
 export const API_URL = "http://localhost:8080";
 export const BASE_API_AUTH_URL = "/api/auth";

@@ -28,7 +28,7 @@ const Attendance = () => {
     // Формирование объекта с датами из таблицы (строки с датами)
     const dateTypes = {
       options: Object.keys(dateRow)
-        .filter((key) => key !== "id" && key !== "isDateRow")
+        .filter((key) => key !== "id" && key !== "isAdditionalRow")
         .map((key, index) => ({
           id: index,
           value: key,

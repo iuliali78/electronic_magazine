@@ -68,7 +68,7 @@ const Signup = () => {
             fields={signupFields}
             buttonText="Зарегистрироваться"
             onClick={(obj) =>
-              handleRegister(obj.email, obj.FIO, obj.password, obj.roleUser)
+              handleRegister(obj.email, obj.FIO, obj.password, obj.roleUser.text)
             }
           />
         </div>

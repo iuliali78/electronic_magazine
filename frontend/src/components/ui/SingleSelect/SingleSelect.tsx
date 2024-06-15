@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export type Option = {
   id: number;
@@ -8,7 +8,7 @@ export type Option = {
 
 interface IProps {
   options: Option[];
-  onChange: (selectValue: string) => void;
+  onChange: (selectValue: Option) => void;
   classNames?: string;
   placeholder?: string;
   onFocus?: () => void;
@@ -23,11 +23,17 @@ const SingleSelect: React.FunctionComponent<IProps> = ({
   onFocus,
   onBlur,
 }) => {
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectOption = options.find(option => option.value === event.target.value);
+  
+    if(selectOption) return onChange(selectOption);
+  }
   
   return (
     <select
       className={classNames}
-      onChange={(e) => onChange(options.find(option => option.value === e.target.value)?.text!)}
+      onChange={(e) => handleOnChange(e)}
       onFocus={onFocus}
       onBlur={onBlur}
     >

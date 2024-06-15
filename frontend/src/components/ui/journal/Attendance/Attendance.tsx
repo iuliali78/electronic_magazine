@@ -1,5 +1,4 @@
 import ModalAttendance from "components/modals/ModalAttendance";
-import { Option } from "components/ui/SingleSelect/SingleSelect";
 import Table from "components/ui/Table";
 import { RowModel, TableDataContext } from "models/table";
 import { useDispatch } from "react-redux";
@@ -39,8 +38,8 @@ const Attendance = () => {
       title: row.FIO,
       props: {
         mode: "edit",
-        dateValue: dateTypes.options,
-        presenceMark: row.presenceMark,
+        rowInfo: row,
+        dateValue: dateTypes.options
       },
     });
 

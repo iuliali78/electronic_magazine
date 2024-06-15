@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { FormField, ResultFormObj } from "models/form";
-import Loader from "components/loader/Loader";
+import Loader from "components/Loader/Loader";
 import { createDynamicStyles } from "utils/other";
 import Input from "../Input";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CalendarIcon } from "components/icons";
 import SingleSelect from "../SingleSelect";
+import { Option } from "../SingleSelect/SingleSelect";
 
 interface IProps {
   fields: FormField[];
@@ -67,8 +68,8 @@ const Form: React.FunctionComponent<IProps> = (props) => {
                   )}
                   options={field.options!}
                   placeholder={field.placeholder}
-                  onChange={(text: string) =>
-                    setField(field.fieldType, text)
+                  onChange={(option: Option) =>
+                    setField(field.fieldType, option)
                   }
                   onFocus={() => handleSelectField(field.id)}
                   onBlur={() => handleSelectField(null)}

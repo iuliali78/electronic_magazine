@@ -71,11 +71,15 @@ export const tableDataSlice = createSlice({
     },
 
     setGradeTotal(state: tableDataState, action: PayloadAction<TResult>) {
-      state.attendanceTotal[action.payload.numberRecord] = action.payload.result;
+      state.gradeTotal[action.payload.numberRecord] = action.payload.result;
     },
+
+    clearTableData(state: tableDataState) {
+      state.tableData = null;
+    }
   },
 });
 
-export const { setTableData, setIsLoaded, editRow, addDateRow, setAttendanceTotal, setGradeTotal } = tableDataSlice.actions;
+export const { setTableData, setIsLoaded, editRow, addDateRow, setAttendanceTotal, setGradeTotal, clearTableData } = tableDataSlice.actions;
 
 export default tableDataSlice.reducer;

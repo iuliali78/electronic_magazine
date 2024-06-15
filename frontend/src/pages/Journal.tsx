@@ -4,7 +4,7 @@ import { ITableData } from "models/api";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
-import { setIsLoaded, setTableData } from "redux/slices/tableDataSlice";
+import { clearTableData, setIsLoaded, setTableData } from "redux/slices/tableDataSlice";
 import { RootState } from "redux/store";
 import { fetchTableData } from "services/journalService";
 import { createDynamicStyles } from "utils/other";
@@ -40,6 +40,7 @@ const Journal = () => {
 
   const getSelectTableData = (tableId: number) => {
     dispatch(setIsLoaded(false));
+    dispatch(clearTableData());
     // Получение данных при загрузке страницы с списком кафедр
     fetchTableData(tableId).then((res) => { 
       // Фильтруем данные для нужной нам таблицы

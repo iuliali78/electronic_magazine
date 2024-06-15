@@ -51,18 +51,17 @@ const Grade = () => {
 
   useEffect(() => {
     if(data.tableData) {
-      const attendanceRows = data.tableData.info[0].rows;
+      const gradeRows = data.tableData.info[0].rows;
 
-      attendanceRows.slice(1, attendanceRows.length).map((row) => {
+      gradeRows.slice(2, gradeRows.length).map((row) => {
         const { id, numberRecord, FIO, ...restProperties } = row;
-        let visits = 0;
-        // Убираем пропуски по болезни, потому что - это уважительная причина
-        const allVisits = Object.keys(restProperties).filter((key) => restProperties[key] !== "Б")
-        // Считаем кол-во посещений
-        allVisits.map((key) => restProperties[key] === "П" && (visits = visits + 1)); 
+        let totalNumber = 0;
+        // Убираем дни, в которые человек отсутствовал
+        const quantityEstimations = Object.keys(restProperties).filter((key) => restProperties[key] !== "-")
+        // Считаем среднее арифметическое значение оценок
+        quantityEstimations.map((key) => totalNumber = totalNumber + Number(restProperties[key])); 
         // Добавляем в стор вычисленное значение посещаемости у конкретного студента (значение в процентах)
-        console.log(visits, Math.round((visits / allVisits.length) * 10) * 10);
-        dispatch(setGradeTotal({numberRecord: row.numberRecord, result: ""}))
+        dispatch(setGradeTotal({numberRecord: row.numberRecord, result: `${(totalNumber / quantityEstimations.length).toFixed(1)}`}))
       });
     }
   }, [data.tableData]);

@@ -60,7 +60,6 @@ const Attendance = () => {
         // Считаем кол-во посещений
         allVisits.map((key) => restProperties[key] === "П" && (visits = visits + 1)); 
         // Добавляем в стор вычисленное значение посещаемости у конкретного студента (значение в процентах)
-        console.log(visits, Math.round((visits / allVisits.length) * 10) * 10);
         dispatch(setAttendanceTotal({numberRecord: row.numberRecord, result: `${parseFloat((visits / allVisits.length).toFixed(2)) * 100}%`}))
       });
     }

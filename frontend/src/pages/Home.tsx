@@ -16,7 +16,7 @@ const Home = () => {
           </h2>
         </div>
         <div className="flex justify-between items-center">
-          <div className="flex flex-col items-center mt-[55px] mr-[25px]">
+          <div className="flex flex-col items-center mt-[55px] mr-[25px] self-start">
             <div className="text-[45px] mb-[38px] text-center whitespace-nowrap max-[1600px]:text-[35px]">
               “Электронный журнал”
               <br />

@@ -5,16 +5,13 @@ import { FormField } from "models/form";
 import { IPropsModalAttendance } from "models/journal";
 import { RowModel } from "models/table";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setIsVisible } from "redux/slices/modalSlice";
-import { editRow, setIsLoaded } from "redux/slices/tableDataSlice";
-import { RootState } from "redux/store";
+import { addDateRow, editRow, setIsLoaded } from "redux/slices/tableDataSlice";
 
 const ModalAttendance: React.FunctionComponent<IPropsModalAttendance> = (
   props
 ) => {
-  const { isLoaded } = useSelector((state: RootState) => state.tableDataSlice);
-
   const dispatch = useDispatch();
 
   const attendanceModalFields: FormField[] = [
@@ -26,18 +23,30 @@ const ModalAttendance: React.FunctionComponent<IPropsModalAttendance> = (
       ...(props.mode === "edit" && { options: props.dateValue as Option[] }),
       placeholder: "Выберите дату",
     },
-    {
-      id: 1,
-      label: "Отметка присутствия",
-      fieldType: "presenceMarks",
-      fieldComplextyType: "singleSelect",
-      options: presenceMarks.options,
-      placeholder: "Выберите отметку",
-    },
+    ...(props.mode === "edit"
+      ? [
+          {
+            id: 1,
+            label: "Отметка присутствия",
+            fieldType: "presenceMarks",
+            fieldComplextyType: "singleSelect",
+            options: presenceMarks.options,
+            placeholder: "Выберите отметку",
+          },
+        ]
+      : []),
   ];
 
   const handleCreateRow = (obj: RowModel) => {
-    console.log(obj);
+    dispatch(setIsLoaded(false));
+    // Добавляем новую запись в стор
+    dispatch(addDateRow(obj));
+    // Закрываем модальное окно
+    dispatch(setIsVisible(false));
+
+    setTimeout(() => {
+      dispatch(setIsLoaded(true));
+    }, 1000);
   };
 
   const handleEditRow = (obj: RowModel) => {
@@ -51,7 +60,7 @@ const ModalAttendance: React.FunctionComponent<IPropsModalAttendance> = (
     dispatch(setIsLoaded(false));
     // Обновляем данные в сторе
     dispatch(editRow(newObj));
-
+    // Закрываем модальное окно
     dispatch(setIsVisible(false));
 
     setTimeout(() => {

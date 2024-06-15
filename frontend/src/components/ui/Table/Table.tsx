@@ -67,7 +67,7 @@ const Table: React.FunctionComponent<IProps> = (props) => {
               </button>
             </div>
           )}
-          <div className="max-h-[340px] overflow-y-auto">
+          <div className=" max-w-[1160px] max-h-[346px] overflow-auto">
             <table className="w-full border-separate border-spacing-0">
               <thead className="bg-[#E1EDFF]">
                 <tr>
@@ -89,7 +89,7 @@ const Table: React.FunctionComponent<IProps> = (props) => {
                         key={column.id || "id_actions"}
                         className={createDynamicStyles(
                           index === props.rows!.length - 1,
-                          "text-center border-t-[1px] border-l-[1px] border-solid border-[#CDE1FF] bg-[#FFFFFF] py-[5px] px-[15px] last:border-r-[1px]",
+                          "text-center border-t-[1px] border-l-[1px] border-solid border-[#CDE1FF] bg-[#FFFFFF] py-[5px] px-[15px] last:border-r-[1px] text-nowrap",
                           "first:rounded-bl-[16px] last:rounded-br-[16px] border-b-[1px]"
                         )}
                       >

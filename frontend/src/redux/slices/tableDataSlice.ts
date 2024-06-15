@@ -3,14 +3,20 @@ import { ITableData } from "models/api";
 import { BaseColumn, RowModel } from "models/table";
 import moment from "moment";
 
+type TResult = Record<string, string>;
+
 interface tableDataState {
   tableData: ITableData | null;
   isLoaded: boolean;
+  attendanceTotal: TResult;
+  gradeTotal: TResult;
 }
 
 const initialState: tableDataState = {
   tableData: null,
   isLoaded: true,
+  attendanceTotal: {},
+  gradeTotal: {}
 };
 
 export const tableDataSlice = createSlice({
@@ -57,9 +63,17 @@ export const tableDataSlice = createSlice({
     setIsLoaded(state: tableDataState, action: PayloadAction<boolean>) {
       state.isLoaded = action.payload;
     },
+
+    setAttendanceTotal(state: tableDataState, action: PayloadAction<TResult>) {
+      state.attendanceTotal[action.payload.numberRecord] = action.payload.result;
+    },
+
+    setGradeTotal(state: tableDataState, action: PayloadAction<TResult>) {
+      state.attendanceTotal[action.payload.numberRecord] = action.payload.result;
+    },
   },
 });
 
-export const { setTableData, setIsLoaded, editRow, addDateRow } = tableDataSlice.actions;
+export const { setTableData, setIsLoaded, editRow, addDateRow, setAttendanceTotal, setGradeTotal } = tableDataSlice.actions;
 
 export default tableDataSlice.reducer;

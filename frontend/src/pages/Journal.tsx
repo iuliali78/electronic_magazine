@@ -3,7 +3,7 @@ import { ATTENDANCE_URL, GENERAL_STATISTICS_URL, GRADE_URL } from "const";
 import { ITableData } from "models/api";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { setIsLoaded, setTableData } from "redux/slices/tableDataSlice";
 import { RootState } from "redux/store";
 import { fetchTableData } from "services/journalService";

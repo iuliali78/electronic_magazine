@@ -30,5 +30,6 @@ export interface ISignin {
 export interface IPersonalInfo {
   id: number,
   header: string,
+  type: "text" | "date",
   value: string | null,
 }

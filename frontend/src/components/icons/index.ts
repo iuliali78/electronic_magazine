@@ -9,3 +9,4 @@ export { default as CloseIcon } from './CloseIcon';
 export { default as CalendarIcon } from './CalendarIcon';
 export { default as RightArrowIcon } from './RightArrowIcon';
 export { default as DownArrowIcon } from './DownArrowIcon';
+export { default as OkIcon } from './OkIcon';

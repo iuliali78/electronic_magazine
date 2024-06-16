@@ -2,35 +2,45 @@ import React, { useState } from "react";
 import PageWrapper from "components/ui/PageWrapper";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
-import { defineRole } from "utils/other";
 import USER_AVATAR from "assets/images/USER.png";
-import { PenIcon } from "components/icons";
+import { OkIcon, PenIcon } from "components/icons";
 import { IPersonalInfo } from "models/user";
 const User = () => {
   const { username, role, email } = useSelector(
     (state: RootState) => state.userSlice.user
   );
 
+  const [activeEditField, setActiveEditField] = useState<number | null>(null);
   const [personalInfo, setPersonalInfo] = useState<IPersonalInfo[]>([
     {
       id: 0,
+      type: "date",
       header: "День рождения",
       value: null,
     },
     {
       id: 1,
+      type: "text",
       header: "Телефон",
       value: null,
     },
     {
       id: 2,
+      type: "text",
       header: "Почта (E-mail)",
       value: email ?? null,
     },
   ]);
 
-  const setField = (field: string, value: string) => {
-    setPersonalInfo((ps) => ({ ...ps, [field]: value }));
+  const setField = (id: number, value: string) => {
+    setPersonalInfo((ps) =>
+      ps.map((item) => (item.id === id ? { ...item, value: value } : item))
+    );
+  };
+
+  const clickEditInfo = (id: number) => {
+    if(activeEditField === id) setActiveEditField(null);
+    else setActiveEditField(id);
   };
 
   return (
@@ -50,11 +60,7 @@ const User = () => {
                 <h2 className="text-[30px] font-semibold text-center mb-[10px]">
                   {username}
                 </h2>
-                {defineRole(role!) !== "user" && (
-                  <div className="text-center text-[24px] mb-[40px]">
-                    {role}
-                  </div>
-                )}
+                <div className="text-center text-[24px] mb-[40px]">{role}</div>
                 <div className="flex">
                   <div className="mr-[34px] text-[22px]">Кафедра:</div>
                   <div className="text-[22px]">
@@ -69,18 +75,30 @@ const User = () => {
           <div className="text-[22px] border-b-[1px] border-solid border-[#93A8F4] mb-[8px] mt-[24px]">
             Дополнительная информация:
           </div>
-          <div className="grid grid-cols-3 mt-[33px] px-[38px] w-full">
+          <div className="grid grid-cols-3 grid-rows-[50px_50px_50px] mt-[33px] px-[38px] w-full">
             {personalInfo.map((item) => (
               <React.Fragment key={item.id}>
                 <div className="text-[22px]">{item.header}</div>
                 <div className="text-[22px] grow">
-                  <span className="block max-w-[800px] text-center">
-                    {item.value ?? "-"}
-                  </span>
+                  {item.id === activeEditField ? (
+                    <input
+                      className="outline-none w-full p-[5px] rounded-[5px] text-[22px]"
+                      type={item.type}
+                      value={item.value || ""}
+                      onChange={(e) => setField(item.id, e.target.value)}
+                    />
+                  ) : (
+                    <span className="block max-w-[800px] text-center">
+                      {item.value ?? "-"}
+                    </span>
+                  )}
                 </div>
                 <div className="flex justify-end items-center">
-                  <span className="cursor-pointer rounded-[50px] hover:bg-[#000] hover:bg-opacity-10 p-[7px] transition duration-300 ease-in-out">
-                    <PenIcon />
+                  <span
+                    className="cursor-pointer rounded-[50px] hover:bg-[#000] hover:bg-opacity-10 p-[7px] transition duration-300 ease-in-out"
+                    onClick={() => clickEditInfo(item.id)}
+                  >
+                    {item.id === activeEditField ? <OkIcon/> : <PenIcon />}
                   </span>
                 </div>
               </React.Fragment>

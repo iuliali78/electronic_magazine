@@ -10,13 +10,15 @@ interface tableDataState {
   isLoaded: boolean;
   attendanceTotal: TResult;
   gradeTotal: TResult;
+  selectDiscipline: string | null;
 }
 
 const initialState: tableDataState = {
   tableData: null,
   isLoaded: true,
   attendanceTotal: {},
-  gradeTotal: {}
+  gradeTotal: {},
+  selectDiscipline: null,
 };
 
 export const tableDataSlice = createSlice({
@@ -29,37 +31,58 @@ export const tableDataSlice = createSlice({
 
     addDateRow(state: tableDataState, action: PayloadAction<RowModel>) {
       // Определяем индекс последней колонки в таблице до добавления
-      const lastColumnIndex = state.tableData?.columns[state.tableData?.columns.length - 1]?.field.split('-')[1];
-  
+      const lastColumnIndex =
+        state.tableData?.columns[
+          state.tableData?.columns.length - 1
+        ]?.field.split("-")[1];
+
       // Добавление новых данныхв таблицу
       const newColumn: BaseColumn = {
-          id:(state.tableData?.columns.length || 1) + 1,
-          field: `dateNumber-${Number(lastColumnIndex) + 1}`,
-          type: "string",
-          headerName: "Дата"
-      }
+        id: (state.tableData?.columns.length || 1) + 1,
+        field: `dateNumber-${Number(lastColumnIndex) + 1}`,
+        type: "string",
+        headerName: "Дата",
+      };
 
-      if(state.tableData) {
+      if (state.tableData) {
         // Добавляем новую колонку в таблицу
         state.tableData.columns.push(newColumn);
         // Добавляем значение даты в данную колонку
-        state.tableData.info[0].rows = state.tableData.info[0].rows.map(row => {
-          if(row.isAdditionalRow && !row.isTypeLesson) return {...row, [`dateNumber-${Number(lastColumnIndex) + 1}`]: moment(action.payload.date).format("YYYY-MM-DD") }
-        // Добавляем тип занятия в данную колонку, если есть такое значение в переданном объекте
-          if(row.isTypeLesson) return {...row, [`dateNumber-${Number(lastColumnIndex) + 1}`]: action.payload.lessonType.text }
-          return row;
-        })
-      } 
+        state.tableData.info[0].rows = state.tableData.info[0].rows.map(
+          (row) => {
+            if (row.isAdditionalRow && !row.isTypeLesson)
+              return {
+                ...row,
+                [`dateNumber-${Number(lastColumnIndex) + 1}`]: moment(
+                  action.payload.date
+                ).format("YYYY-MM-DD"),
+              };
+            // Добавляем тип занятия в данную колонку, если есть такое значение в переданном объекте
+            if (row.isTypeLesson)
+              return {
+                ...row,
+                [`dateNumber-${Number(lastColumnIndex) + 1}`]:
+                  action.payload.lessonType.text,
+              };
+            return row;
+          }
+        );
+      }
     },
 
     editRow(state: tableDataState, action: PayloadAction<RowModel>) {
       // Обновление строки в таблице новыми данными
       state.tableData!.info[0].rows = state.tableData!.info[0].rows.map(
         (row) => {
-          if(row?.numberRecord === action.payload.numberRecord) return { ...action.payload };
+          if (row?.numberRecord === action.payload.numberRecord)
+            return { ...action.payload };
           return row;
         }
       );
+    },
+
+    setActiveDiscipline(state: tableDataState, action: PayloadAction<string>) {
+      state.selectDiscipline = action.payload;
     },
 
     setIsLoaded(state: tableDataState, action: PayloadAction<boolean>) {
@@ -67,7 +90,8 @@ export const tableDataSlice = createSlice({
     },
 
     setAttendanceTotal(state: tableDataState, action: PayloadAction<TResult>) {
-      state.attendanceTotal[action.payload.numberRecord] = action.payload.result;
+      state.attendanceTotal[action.payload.numberRecord] =
+        action.payload.result;
     },
 
     setGradeTotal(state: tableDataState, action: PayloadAction<TResult>) {
@@ -76,10 +100,19 @@ export const tableDataSlice = createSlice({
 
     clearTableData(state: tableDataState) {
       state.tableData = null;
-    }
+    },
   },
 });
 
-export const { setTableData, setIsLoaded, editRow, addDateRow, setAttendanceTotal, setGradeTotal, clearTableData } = tableDataSlice.actions;
+export const {
+  setTableData,
+  setIsLoaded,
+  editRow,
+  addDateRow,
+  setAttendanceTotal,
+  setGradeTotal,
+  clearTableData,
+  setActiveDiscipline,
+} = tableDataSlice.actions;
 
 export default tableDataSlice.reducer;

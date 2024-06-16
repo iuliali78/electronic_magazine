@@ -3,11 +3,15 @@ import PageWrapper from "components/ui/PageWrapper";
 import { JOURNAL_URL } from "const";
 import { listDepartments, listGroupsDisciplines } from "data/staticData";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setActiveDiscipline } from "redux/slices/tableDataSlice";
 
 const ListDepartments = () => {
   const [activeItem, setActiveItem] = useState<number | null>(null);
   const [activeListDiscipline, setActiveListDiscipline] = useState<string | null>(null);
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -27,7 +31,8 @@ const ListDepartments = () => {
     else setActiveListDiscipline(relationId);
   };
 
-  const handleClickDiscipline = (disciplineId: string) => {
+  const handleClickDiscipline = (disciplineId: string, disciplineName: string) => {
+    dispatch(setActiveDiscipline(disciplineName));
     navigate(JOURNAL_URL + "/" + disciplineId);
   }
 
@@ -91,7 +96,7 @@ const ListDepartments = () => {
                   <div
                     key={disciplineObj.id}
                     className="border-[1px] bg-[#ACD0FF8F] rounded-[15px] border-solid border-[#5972F7] p-[10px] flex justify-center items-center cursor-pointer hover:bg-[#5778f1] hover:text-[#FFFFFF] duration-[250ms] ease-in-out"
-                    onClick={() => handleClickDiscipline(`${groupDisciplines.groupId}_${disciplineObj.id}`)}
+                    onClick={() => handleClickDiscipline(`${groupDisciplines.groupId}_${disciplineObj.id}`, disciplineObj.discipline)}
                   >
                     <span className="text-center">
                       {disciplineObj.discipline}

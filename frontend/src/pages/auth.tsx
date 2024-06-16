@@ -93,7 +93,7 @@ function Auth() {
   };
   return (
     <div className="auth max-w-[1000px] mx-auto mt-[30px]">
-      <div className="flex justify-between items-center bg-[#CDE1FF] px-[60px] pt-[70px] pb-[45px] shadow-[0_1px_4px_1px_rgba(0,0,0,0.3)] rounded-[25px]">
+      <div className="flex justify-between items-center bg-[#CDE1FF] px-[60px] pt-[50px] pb-[45px] shadow-[0_1px_4px_1px_rgba(0,0,0,0.3)] rounded-[25px]">
         <div className="auth__inner grow mr-[130px]">
           <div className="flex flex-col items-center">
             <div><img src={FITKB_LOGO} alt="FITKB_LOGO" /></div>

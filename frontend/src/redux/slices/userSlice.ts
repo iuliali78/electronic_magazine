@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 export type User = {
   id: string | null;
   username: string | null;
-  email: string;
+  email: string | null;
   role: string | null;
   isAuth: boolean;
 };
@@ -16,7 +16,7 @@ const initialState: userState = {
   user: {
     id: localStorage.getItem('userId'),
     username: localStorage.getItem('FIO'),
-    email: "",
+    email: localStorage.getItem('email'),
     role: localStorage.getItem('role'),
     isAuth: !!localStorage.getItem('token'),
   }

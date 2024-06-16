@@ -63,6 +63,7 @@ function Auth() {
         localStorage.setItem('userId', JSON.stringify(data.id));
         localStorage.setItem('FIO', data.email);
         localStorage.setItem('role', role);
+        localStorage.setItem('email', data.username);
         if(data.group) localStorage.setItem('group', data.group);
 
         //заносим данные в redux

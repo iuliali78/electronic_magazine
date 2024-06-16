@@ -26,3 +26,9 @@ export interface ISignin {
   type: string;
   token: string;
 }
+
+export interface IPersonalInfo {
+  id: number,
+  header: string,
+  value: string | null,
+}

@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { saveUser, setIsAuth } from "../redux/slices/userSlice";
 import { FormField } from "models/form";
 import Form from "components/ui/Form";
+import VSTU_LOGO from "assets/images/VSTU-LOGO.png";
+import FITKB_LOGO from "assets/images/FITKB-LOGO.png";
 
 const authFields: FormField[] = [
   {
@@ -44,7 +46,7 @@ function Auth() {
         });
 
         //определение роли
-        let role = '';
+        let role = "";
 
         switch (data.roles[0]) {
           case "ROLE_USER":
@@ -60,18 +62,18 @@ function Auth() {
 
         // Сохраняем некоторые данные в localStorage для отбоажения в шапке сайта
         // email - это имя пользователя, username - это почта. На бекенде данные сверяются по username, а на клиенте нужно отправлять почту
-        localStorage.setItem('userId', JSON.stringify(data.id));
-        localStorage.setItem('FIO', data.email);
-        localStorage.setItem('role', role);
-        localStorage.setItem('email', data.username);
-        if(data.group) localStorage.setItem('group', data.group);
+        localStorage.setItem("userId", JSON.stringify(data.id));
+        localStorage.setItem("FIO", data.email);
+        localStorage.setItem("role", role);
+        localStorage.setItem("email", data.username);
+        if (data.group) localStorage.setItem("group", data.group);
 
         //заносим данные в redux
         dispatch(
           saveUser({
             id: data.id,
             username: data.email, // Тут та же самая причина
-            email: data.username, // 
+            email: data.username, //
             role: role,
             group: data.group,
           })
@@ -90,33 +92,43 @@ function Auth() {
     );
   };
   return (
-    <div className="auth max-w-[500px] mx-auto mt-[150px]">
-      <div className="auth__inner rounded-[25px] bg-[#CDE1FF] px-[60px] pt-[70px] pb-[45px] shadow-[0_1px_4px_1px_rgba(0,0,0,0.3)]">
-        <h1 className="auth__title text-[28px] text-center">Авторизация</h1>
-        <div className="auth__text mb-[50px] mt-[3px] text-center">
-          Заполните, чтобы войти
-        </div>
-        {!message.success && (
-          <div className="auth__info max-w-full">
-            <Form
-              fields={authFields}
-              buttonText="Войти"
-              onClick={(obj) => handleLogin(obj.email, obj.password)}
-            />
-            <div className="auth__info-link text-center text-[14px]">
-              Нет аккаунта? <br />
-              <Link
-                to={SINGUP_URL}
-                className="auth__info-link__text pl-[3px] text-[#010F58] hover:text-[#4d69f3] duration-[200ms] ease-in-out"
-              >
-                Зарегистрируйтесь
-              </Link>
+    <div className="auth max-w-[1000px] mx-auto mt-[30px]">
+      <div className="flex justify-between items-center bg-[#CDE1FF] px-[60px] pt-[70px] pb-[45px] shadow-[0_1px_4px_1px_rgba(0,0,0,0.3)] rounded-[25px]">
+        <div className="auth__inner grow mr-[130px]">
+          <div className="flex flex-col items-center">
+            <div><img src={FITKB_LOGO} alt="FITKB_LOGO" /></div>
+            <h1 className="auth__title text-[28px] text-center">
+              Аутентификация
+            </h1>
+            <div className="auth__text mb-[50px] mt-[3px] text-center">
+              Заполните, чтобы войти
             </div>
           </div>
-        )}
-        {message.message && (
-          <div className="message__succes">{message.message}</div>
-        )}
+          {!message.success && (
+            <div className="auth__info max-w-full">
+              <Form
+                fields={authFields}
+                buttonText="Войти"
+                onClick={(obj) => handleLogin(obj.email, obj.password)}
+              />
+              <div className="auth__info-link text-center text-[14px]">
+                Нет аккаунта? <br />
+                <Link
+                  to={SINGUP_URL}
+                  className="auth__info-link__text pl-[3px] text-[#010F58] hover:text-[#4d69f3] duration-[200ms] ease-in-out"
+                >
+                  Зарегистрируйтесь
+                </Link>
+              </div>
+            </div>
+          )}
+          {message.message && (
+            <div className="message__succes">{message.message}</div>
+          )}
+        </div>
+        <div className="w-[350px] h-[420px]">
+          <img className="object-cover" src={VSTU_LOGO} alt="VSTU_LOGO" />
+        </div>
       </div>
     </div>
   );

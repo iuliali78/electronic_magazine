@@ -1,9 +1,11 @@
-import { FormField } from "models/form";
+import { FormField, ResultFormObj } from "models/form";
 import { useNavigate } from "react-router-dom";
 import { register } from "services/userServise";
 import Form from "components/ui/Form";
-import { userTypes } from "const";
+import { groupsTypes, userTypes } from "const";
 import { defineRole } from "utils/other";
+import { useCallback, useState } from "react";
+import FITKB_LOGO from "assets/images/FITKB-LOGO.png";
 
 const signupFields: FormField[] = [
   {
@@ -43,6 +45,8 @@ const signupFields: FormField[] = [
 ];
 
 const Signup = () => {
+  const [fields, setFields] = useState<FormField[]>(signupFields);
+
   const navigate = useNavigate();
 
   const handleRegister = (
@@ -56,19 +60,48 @@ const Signup = () => {
     );
   };
 
+  const handleChangeFields = useCallback((obj: ResultFormObj) => {
+    console.log(obj);
+    if (defineRole(obj.roleUser?.text) === "user") {
+      setFields(
+        fields.concat([
+          {
+            id: 5,
+            label: "Выберите группу",
+            fieldType: "group",
+            fieldComplextyType: "singleSelect",
+            options: groupsTypes.options,
+            placeholder: "Выберите группу",
+          },
+        ])
+      );
+    } else setFields(signupFields);
+  }, []);
+
   return (
     <div className="signup max-w-[500px] mx-auto my-[20px]">
-      <div className="signup__inner rounded-[25px] bg-[#CDE1FF] px-[60px] pt-[70px] pb-[45px] shadow-[0_1px_4px_1px_rgba(0,0,0,0.3)]">
-        <h1 className="signup__title text-[28px] text-center">Регистрация</h1>
-        <div className="signup__text mb-[50px] mt-[3px] text-center">
-          Заполните, чтобы зарегистрироваться
+      <div className="signup__inner rounded-[25px] bg-[#CDE1FF] px-[60px] pt-[20px] pb-[45px] shadow-[0_1px_4px_1px_rgba(0,0,0,0.3)]">
+        <div className="flex flex-col items-center">
+          <div>
+            <img src={FITKB_LOGO} alt="logo" />
+          </div>
+          <h1 className="signup__title text-[28px] text-center">Регистрация</h1>
+          <div className="signup__text mb-[50px] mt-[3px] text-center">
+            Заполните, чтобы зарегистрироваться
+          </div>
         </div>
         <div className="signup__info max-w-full">
           <Form
-            fields={signupFields}
+            fields={fields}
             buttonText="Зарегистрироваться"
+            onChange={(obj) => handleChangeFields(obj)}
             onClick={(obj) =>
-              handleRegister(obj.email, obj.FIO, obj.password, obj.roleUser.text)
+              handleRegister(
+                obj.email,
+                obj.FIO,
+                obj.password,
+                obj.roleUser.text
+              )
             }
           />
         </div>

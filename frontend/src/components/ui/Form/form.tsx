@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormField, ResultFormObj } from "models/form";
 import Loader from "components/Loader/Loader";
 import { createDynamicStyles } from "utils/other";
@@ -12,6 +12,7 @@ import { Option } from "../SingleSelect/SingleSelect";
 interface IProps {
   fields: FormField[];
   onClick: (obj: ResultFormObj) => Promise<void>;
+  onChange?: (obj: ResultFormObj) => void;
   buttonText?: string;
   data?: ResultFormObj;
 }
@@ -37,6 +38,10 @@ const Form: React.FunctionComponent<IProps> = (props) => {
   const handleSelectField = (id: number | null) => {
     setActiveField(id);
   };
+
+  useEffect(() => {
+    if(props.onChange) props.onChange(innerValue);
+  }, [innerValue])
 
   return (
     <div className="max-h-[460px] overflow-y-auto overflow-x-hidden">

@@ -45,7 +45,7 @@ const User = () => {
 
   return (
     <PageWrapper customStyles classNames="max-w-[1240px] mx-auto">
-      <div className="flex flex-col mt-[60px] max-[1600px]:mt-[30px] h-full">
+      <div className="flex flex-col mt-[60px] max-[1550px]:mt-[30px] h-full">
         <div className="bg-[#ACD0FF36] border-[1px] border-solid border-[#93A8F4] rounded-[15px]">
           <div className="flex flex-col px-[43px] py-[15px] items-center">
             <div className="flex justify-between items-center">
@@ -57,13 +57,13 @@ const User = () => {
                 />
               </div>
               <div className="flex flex-col items-center">
-                <h2 className="text-[30px] font-semibold text-center mb-[10px] max-[1600px]:text-[26px]">
+                <h2 className="text-[30px] font-semibold text-center mb-[10px] max-[1550px]:text-[26px]">
                   {username}
                 </h2>
-                <div className="text-center text-[24px] mb-[40px] max-[1600px]:text-[20px]">{role}</div>
+                <div className="text-center text-[24px] mb-[40px] max-[1550px]:text-[20px]">{role}</div>
                 <div className="flex">
-                  <div className="mr-[34px] text-[22px] max-[1600px]:text-[20px]">Кафедра:</div>
-                  <div className="text-[22px] max-[1600px]:text-[20px]">
+                  <div className="mr-[34px] text-[22px] max-[1550px]:text-[20px]">Кафедра:</div>
+                  <div className="text-[22px] max-[1550px]:text-[20px]">
                     Автоматизированных и вычислительных систем
                   </div>
                 </div>
@@ -72,14 +72,14 @@ const User = () => {
           </div>
         </div>
         <div>
-          <div className="text-[22px] border-b-[1px] border-solid border-[#93A8F4] mb-[8px] mt-[24px] max-[1600px]:text-[18px]">
+          <div className="text-[22px] border-b-[1px] border-solid border-[#93A8F4] mb-[8px] mt-[24px] max-[1550px]:text-[18px]">
             Дополнительная информация:
           </div>
           <div className="grid grid-cols-3 grid-rows-[50px_50px_50px] mt-[33px] px-[38px] w-full">
             {personalInfo.map((item) => (
               <React.Fragment key={item.id}>
-                <div className="text-[22px] max-[1600px]:text-[18px]">{item.header}</div>
-                <div className="text-[22px] max-[1600px]:text-[18px] grow">
+                <div className="text-[22px] max-[1550px]:text-[18px]">{item.header}</div>
+                <div className="text-[22px] max-[1550px]:text-[18px] grow">
                   {item.id === activeEditField ? (
                     <input
                       className="outline-none w-full p-[5px] rounded-[5px] text-[22px]"

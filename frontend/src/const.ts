@@ -46,6 +46,19 @@ export const userTypes = {
   ],
 };
 
+//список ролей в выпадающем списке
+export const groupsTypes = {
+  options: [
+    { text: "бВМ-201", value: "vm201", id: 0 },
+    { text: "бВМ-211", value: "vm211", id: 1 },
+    { text: "бИВТ-222", value: "ivt222", id: 2 },
+    { text: "бПО-211", value: "po211", id: 3 },
+    { text: "бПО-201", value: "po201", id: 4 },
+    { text: "бИСТ-225", value: "ist225", id: 5 },
+    { text: "бОИС-211", value: "bois211", id: 6 },
+  ],
+};
+
 //список отметок присутсвия в выпадающем списке
 export const presenceMarks = {
   options: [

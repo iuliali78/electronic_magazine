@@ -7,7 +7,7 @@ import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { clearTableData, setIsLoaded, setTableData } from "redux/slices/tableDataSlice";
 import { RootState } from "redux/store";
 import { fetchTableData } from "services/journalService";
-import { createDynamicStyles } from "utils/other";
+import { createDynamicStyles, defineRole } from "utils/other";
 
 const journalRoutes = [
   {
@@ -33,6 +33,8 @@ const Journal = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const { user } = useSelector((state:RootState) => state.userSlice)
+
   // Данные из стора
   const { tableData, isLoaded } = useSelector((state: RootState) => state.tableDataSlice)
 
@@ -43,9 +45,13 @@ const Journal = () => {
     dispatch(clearTableData());
     // Получение данных при загрузке страницы с списком кафедр
     fetchTableData(tableId).then((res) => { 
+      let filterRows = [];
       // Фильтруем данные для нужной нам таблицы
-      // TODO: сделать фильтрацию данных по роли. Преподаватель - все строки, Студент - его личная строка
-      const filterRows = res.info.filter(tableInfo => tableInfo.disciplineId === id);
+      filterRows = res.info.filter(tableInfo => tableInfo.disciplineId === id);
+      // Если авторизовался студент, то отображаем только его данные
+      if(user.role && defineRole(user.role) === "user") {
+        filterRows[0].rows = filterRows[0].rows.filter(row => row.numberRecord == user.id || row.isAdditionalRow);
+      }
 
       // Перезаписываем объект данных таблицы найденными данными
       const changeResponse: ITableData = {
@@ -96,7 +102,7 @@ const Journal = () => {
           ))}
         </ul>
         {/* Отображение вложенного компонента при соответствующем url */}
-        <Outlet context={{tableData, isLoaded}}/>
+        <Outlet context={{tableData, user, isLoaded}}/>
       </div>
     </PageWrapper>
   );

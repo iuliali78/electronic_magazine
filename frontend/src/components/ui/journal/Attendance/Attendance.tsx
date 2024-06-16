@@ -49,18 +49,27 @@ const Attendance = () => {
   };
 
   useEffect(() => {
-    if(data.tableData) {
+    if (data.tableData) {
       const attendanceRows = data.tableData.info[0].rows;
 
       attendanceRows.slice(1, attendanceRows.length).map((row) => {
         const { id, numberRecord, FIO, ...restProperties } = row;
         let visits = 0;
         // Убираем пропуски по болезни, потому что - это уважительная причина
-        const allVisits = Object.keys(restProperties).filter((key) => restProperties[key] !== "Б")
+        const allVisits = Object.keys(restProperties).filter(
+          (key) => restProperties[key] !== "Б"
+        );
         // Считаем кол-во посещений
-        allVisits.map((key) => restProperties[key] === "П" && (visits = visits + 1)); 
+        allVisits.map(
+          (key) => restProperties[key] === "П" && (visits = visits + 1)
+        );
         // Добавляем в стор вычисленное значение посещаемости у конкретного студента (значение в процентах)
-        dispatch(setAttendanceTotal({numberRecord: row.numberRecord, result: `${parseFloat((visits / allVisits.length).toFixed(2)) * 100}`}))
+        dispatch(
+          setAttendanceTotal({
+            numberRecord: row.numberRecord,
+            result: `${parseFloat((visits / allVisits.length).toFixed(2)) * 100}`,
+          })
+        );
       });
     }
   }, [data.tableData]);
@@ -68,6 +77,7 @@ const Attendance = () => {
   return (
     <div className="grow max-h-[600px] overflow-auto">
       <Table
+        user={data.user}
         columns={data.tableData?.columns}
         rows={data.tableData?.info[0].rows}
         isLoaded={data.isLoaded}

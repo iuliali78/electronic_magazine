@@ -69,6 +69,7 @@ const Grade = () => {
   return (
     <div className="grow max-h-[600px] overflow-auto">
        <Table
+       user={data.user}
         columns={data.tableData?.columns}
         rows={data.tableData?.info[0].rows}
         isLoaded={data.isLoaded}

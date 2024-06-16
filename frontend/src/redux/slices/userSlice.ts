@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-type User = {
-  id: number;
+export type User = {
+  id: string | null;
   username: string | null;
   email: string;
-  roles: string;
+  role: string | null;
   isAuth: boolean;
 };
 
@@ -14,10 +14,10 @@ export interface userState {
 
 const initialState: userState = {
   user: {
-    id: 0,
+    id: localStorage.getItem('userId'),
     username: localStorage.getItem('FIO'),
     email: "",
-    roles: JSON.parse(localStorage.getItem('roles')!),
+    role: localStorage.getItem('role'),
     isAuth: !!localStorage.getItem('token'),
   }
 };
@@ -34,10 +34,10 @@ export const userSlice = createSlice({
     },
     logOut: (state) => {
       state.user = {
-        id: 0,
+        id: null,
         username: "",
         email: "",
-        roles: "",
+        role: "",
         isAuth: false,
       };
 

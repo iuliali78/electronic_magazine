@@ -2,7 +2,8 @@ import { PenIcon } from "components/icons";
 import Loader from "components/Loader/Loader";
 import { IAction, IColumn, RowModel, isActionsColumn } from "models/table";
 import React, { useEffect, useState } from "react";
-import { createDynamicStyles } from "utils/other";
+import { User } from "redux/slices/userSlice";
+import { createDynamicStyles, defineRole } from "utils/other";
 
 interface IProps {
   columns?: IColumn[];
@@ -18,6 +19,7 @@ interface IProps {
   canDelete?: boolean;
 
   isLoaded?: boolean;
+  user: User;
 }
 
 const Table: React.FunctionComponent<IProps> = (props) => {
@@ -56,7 +58,7 @@ const Table: React.FunctionComponent<IProps> = (props) => {
     <>
       {props.isLoaded ? (
         <>
-          {props.canAdd && (
+          {props.canAdd && defineRole(props.user.role!) !== "user" && (
             <div className="flex justify-end">
               <button
                 type="button"

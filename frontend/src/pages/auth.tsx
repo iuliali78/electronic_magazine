@@ -60,6 +60,7 @@ function Auth() {
 
         // Сохраняем некоторые данные в localStorage для отбоажения в шапке сайта
         // email - это имя пользователя, username - это почта. На бекенде данные сверяются по username, а на клиенте нужно отправлять почту
+        localStorage.setItem('userId', JSON.stringify(data.id));
         localStorage.setItem('FIO', data.email);
         localStorage.setItem('role', role);
         if(data.group) localStorage.setItem('group', data.group);
@@ -70,7 +71,7 @@ function Auth() {
             id: data.id,
             username: data.email, // Тут та же самая причина
             email: data.username, // 
-            roles: role,
+            role: role,
             group: data.group,
           })
         );

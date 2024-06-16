@@ -1,4 +1,5 @@
 import { Options } from "models/modal";
+import { ROLES } from "const";
 
 interface FIO {
   name: string;
@@ -44,4 +45,17 @@ export const mapComponentInModal = <T>(children: (props: T) => any, options: Opt
     title: "Заголовок",
     props: null,
   };
+};
+
+export const defineRole = (role: string) => {
+  switch (role) {
+    case ROLES.ROLE_DEAN:
+      return "admin";
+    case ROLES.ROLE_TEACHER:
+      return "mod";
+    case ROLES.ROLE_STUDENT:
+      return "user";
+    default:
+      return "";
+  }
 };

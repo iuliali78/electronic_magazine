@@ -1,3 +1,4 @@
+import { User } from "redux/slices/userSlice";
 import { ITableData } from "./api";
 
 export type RowModel = Record<string, any>;
@@ -24,4 +25,4 @@ export const isActionsColumn = (obj: IColumn): obj is IColumnAction => {
   return obj.type === "actions";
 };
 
-export type TableDataContext = { tableData: ITableData, isLoaded: boolean };
+export type TableDataContext = { tableData: ITableData, user: User, isLoaded: boolean };

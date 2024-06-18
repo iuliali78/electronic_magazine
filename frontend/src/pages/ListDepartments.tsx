@@ -42,33 +42,33 @@ const ListDepartments = () => {
       classNames="h-[100vh] flex justify-center items-start"
     >
       <div className="flex justify-between w-[1550px] max-[1800px]:w-[1350px] max-[1655px]:w-[1250px] mx-auto mt-[80px]">
-        <ul className="mr-[150px] flex-[0_1_60%]">
+        <ul className="mr-[150px] flex-[0_1_60%] max-h-[600px] overflow-y-auto">
           {listDepartments.map((item) => (
             <div
               key={item.id}
-              className="flex items-center cursor-pointer"
+              className="flex cursor-pointer"
               onClick={() => handleClickItem(item.id)}
             >
-              <span>
+              <span className="mt-[20px]">
                 {item.id !== activeItem ? (
                   <RightArrowIcon />
                 ) : (
                   <DownArrowIcon />
                 )}
               </span>
-              <li className="text-[22px] relative">
+              <li className="text-[22px] relative mb-[50px]">
                 {item.name}
                 <ul
                   className={
                     item.id !== activeItem
-                      ? "absolute top-[0] left-[45px] opacity-0 invisible z-[0] duration-[250ms]"
-                      : "absolute top-[0] left-[45px] transform  duration-[250ms] translate-y-[70px] opacity-100 visible z-[1]"
+                      ? "absolute flex items-center top-[0] left-[45px] opacity-0 invisible z-[0] duration-[250ms]"
+                      : "absolute flex items-center top-[0] left-[45px] transform  duration-[250ms] translate-y-[70px] opacity-100 visible z-[1]"
                   }
                 >
                   {item.groups.map((groupObj) => (
                     <li
                       key={groupObj.id}
-                      className="py-[8px] text-[18px] px-[25px] bg-[#FFFFFF] rounded-[15px] border-[1px] border-solid border-[#93A8F4] mb-[5px] last:mb-0"
+                      className="py-[8px] text-[18px] px-[25px] bg-[#FFFFFF] rounded-[15px] border-[1px] border-solid border-[#93A8F4] mr-[10px] last:mr-0"
                       onClick={(e) =>
                         handleClickGroup(e, `${item.id}_${groupObj.id}`)
                       }

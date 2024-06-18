@@ -98,7 +98,7 @@ const Table: React.FunctionComponent<IProps> = (props) => {
                         <span className="inline-flex">
                           {row[column.field] ??
                             (isActionsColumn(column) &&
-                              !row.isAdditionalRow &&
+                              !row.isAdditionalRow && defineRole(props.user.role!) !== "user" &&
                               column.getActions(row).map((action, index) => (
                                 <span
                                   key={index}
